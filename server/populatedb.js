@@ -36,12 +36,13 @@ function categoryCreate(name, cb) {
   });
 }
 
-function itemCreate(name, description, category, price, stock, cb) {
+function itemCreate(name, description, category, price, stock, img, cb) {
   itemDetail = {
     name: name,
     description: description,
     price: price,
     stock: stock,
+    img: img,
   };
   if (category != false) itemDetail.category = category;
 
@@ -83,21 +84,23 @@ function createItems(cb) {
     [
       function (callback) {
         itemCreate(
-          "Breville)",
+          "Breville",
           "Does not trap essential oils of your coffee in a paper filter, and makes a beautiful slow-brew. Includes a permanent stainless seel mesh filter.",
           categories[0],
           269,
           25,
+          "breville.png",
           callback
         );
       },
       function (callback) {
         itemCreate(
-          "Kups)",
+          "Kups",
           "Kups signature coffee machine. Includes permanent stainless mesh.",
           categories[0],
           149,
           14,
+          "kups.png",
           callback
         );
       },
@@ -108,6 +111,7 @@ function createItems(cb) {
           categories[1],
           39,
           42,
+          "ovalware.png",
           callback
         );
       },
@@ -118,6 +122,7 @@ function createItems(cb) {
           categories[1],
           20,
           22,
+          "obtat.png",
           callback
         );
       },
@@ -128,6 +133,7 @@ function createItems(cb) {
           categories[2],
           41,
           84,
+          "stanley.png",
           callback
         );
       },
@@ -138,6 +144,7 @@ function createItems(cb) {
           categories[2],
           79,
           102,
+          "cuisinart.png",
           callback
         );
       },
@@ -148,6 +155,7 @@ function createItems(cb) {
           categories[3],
           29,
           34,
+          "bayka.png",
           callback
         );
       },
@@ -158,6 +166,7 @@ function createItems(cb) {
           categories[3],
           135,
           8,
+          "fellow_clara.png",
           callback
         );
       },

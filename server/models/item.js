@@ -7,15 +7,12 @@ var ItemSchema = new Schema({
   category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
   price: { type: Number, required: true },
   stock: { type: Number, required: true },
+  img: { type: String, required: true },
 });
 
 // Virtual for items's URL
 ItemSchema.virtual("url").get(function () {
   return "/catalog/item/" + this._id;
-});
-
-ItemSchema.virtual("img").get(function () {
-  return this.name + ".png";
 });
 
 //Export model

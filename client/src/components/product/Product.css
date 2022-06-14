@@ -1,0 +1,28 @@
+.product {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "img img"
+        "name name"
+        "price stock";
+    background-color: rgb(117, 121, 139);
+    max-width: 200px;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.product__name {
+    grid-area: name;
+}
+
+.product__price {
+    grid-area: price;
+}
+
+.product__sotck {
+    grid-area: sotck;
+}
+
+.product__img {
+    grid-area: img;
+}
