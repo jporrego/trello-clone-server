@@ -1,13 +1,129 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Halant:wght@500;600;700&family=Laila:wght@500;600;700&family=Lateef&display=swap');
+
+:root {
+  --black: #292124;
+  --white: #ffffff;
+  --blue: #6530D9;
+  --purple-dark: #753FBF;
+  --purple: #985EBF;
+  --purple-light: #BF7EAE;
+  --yellow: #F2A950;
+  --red: #e4544a;
+  --grey-dark: #dfdfdf;
+  --grey: #f6f4f5;
+  --brown: #ab7d6e;
+  --brown-dark: rgb(131, 56, 34);
+  --brown-light: #c48875;
+  /* Fonts */
+  --font-primary: 'Nunito', sans-serif;
+  --font-secondary: 'Laila', serif;
+  /* Utilities */
+  --big-padding: 2rem;
+  --small-padding: 1rem;
+  --product-section-max-width: 77rem;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+.btn-round {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20rem;
+  width: 2rem;
+  height: 2rem;
+  font-weight: 800;
+  font-size: 1.4rem;
+  background-color: var(--brown-light);
+  color: var(--white);
+  border: none;
+  transition: all .15s ease-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (pointer: fine) {
+  .btn-round:hover {
+    filter: brightness(1.1);
+  }
+}
+
+
+
+.btn-square--small {
+  border: none;
+  font-size: 1.8rem;
+  padding: .5rem 1rem;
+  font-weight: 600;
+  width: fit-content;
+  border-radius: .5rem;
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-square--big {
+  border: none;
+  font-size: 1.4rem;
+  padding: .5rem 1rem;
+  font-weight: 600;
+  width: fit-content;
+  border-radius: .5rem;
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (pointer: fine) {
+  .btn-square--small:hover, .btn-square--big:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-square--small:active, .btn-square--big:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn--brown {
+  background-color: var(--brown);
+  color: var(--white);
+}
+
+.btn--brown-light {
+  background-color: var(--brown-light);
+  color: var(--white);
+}
+
+.btn--purple {
+  background-color: var(--purple);
+  color: var(--white);
+}
+
+.btn-back {
+  font-size: 3rem;
+  color: var(--brown);
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+}
+
+@media (pointer: fine) {
+  .btn-back:hover {
+    transform: scale(1.075);
+  }
 }

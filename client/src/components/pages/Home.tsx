@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Product as ProductInferface } from "../../types";
 import Product from "../product/Product";
+import "./Home.css";
 
 function Home() {
   const [products, setProducts] = useState<ProductInferface[]>([]);
@@ -21,11 +22,13 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className="home">
       <div>Home</div>
-      {products.map((product) => (
-        <Product key={product._id} product={product}></Product>
-      ))}
+      <div className="product-section">
+        {products.map((product) => (
+          <Product key={product._id} product={product}></Product>
+        ))}
+      </div>
     </div>
   );
 }
