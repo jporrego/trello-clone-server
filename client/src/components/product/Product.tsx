@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import "./Product.css";
 import { Product as ProductInterface } from "../../types";
@@ -8,18 +9,25 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({ product }) => {
+  const { _id, name, price, stock, img } = product;
+  const navigate = useNavigate();
+
+  const handleGoToItemDetail = () => {
+    navigate(`/item/detail/${_id}`);
+  };
+
   return (
     <div className="product">
-      <div className="product__name">{product.name}</div>
-      <div className="product__price">${product.price}.00</div>
-      <div className="product__stock">{product.stock} units</div>
+      <div className="product__name">{name}</div>
+      <div className="product__price">${price}.00</div>
+      <div className="product__stock">{stock} units</div>
       <div className="product__img">
-        <img
-          src={require("../../assets/img/product/" + product.img)}
-          alt={product.name}
-        />
+        <img src={require("../../assets/img/product/" + img)} alt={name} />
       </div>
-      <Link className="btn btn-link" to={`/edit/${product._id}`}>
+      <Link className="btn btn-link" to={`/item/detail/${_id}`}>
+        Details
+      </Link>
+      <Link className="btn btn-link" to={`/item/edit/${_id}`}>
         Edit
       </Link>
     </div>
