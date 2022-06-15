@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Product as ProductInferface } from "../../types";
-import Product from "../product/Product";
-import "./Home.css";
+import { Link } from "react-router-dom";
+import "./ItemList.css";
+import { Product as ProductInferface } from "../../../types";
+import Product from "../../product/Product";
 
-function Home() {
+function ItemList() {
   const [products, setProducts] = useState<ProductInferface[]>([]);
 
   useEffect(() => {
@@ -22,15 +23,17 @@ function Home() {
   };
 
   return (
-    <div className="home">
+    <div className="ItemList">
       <div>Home</div>
       <div className="product-section">
         {products.map((product) => (
           <Product key={product._id} product={product}></Product>
         ))}
       </div>
+
+      <Link to="/item/create">Create</Link>
     </div>
   );
 }
 
-export default Home;
+export default ItemList;

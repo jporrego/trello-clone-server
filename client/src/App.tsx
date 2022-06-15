@@ -1,11 +1,17 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./components/pages/Home";
+import ItemList from "./components/pages/item_list/ItemList";
 
 function App() {
   return (
     <div className="App">
-      <Home></Home>
+      <nav>Navbar</nav>
+      <Routes>
+        <Route path="/" element={<ItemList />} />
+        <Route path="/item/edit/:id" element={<div>Edit</div>} />
+        <Route path="/item/create/" element={<div>Create</div>} />
+      </Routes>
     </div>
   );
 }

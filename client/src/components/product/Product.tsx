@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Product as ProductInterface } from "../../types";
+import { Link } from "react-router-dom";
 import "./Product.css";
+import { Product as ProductInterface } from "../../types";
 
 interface ProductProps {
   product: ProductInterface;
@@ -18,6 +19,9 @@ const Product: React.FC<ProductProps> = ({ product }) => {
           alt={product.name}
         />
       </div>
+      <Link className="btn btn-link" to={`/edit/${product._id}`}>
+        Edit
+      </Link>
     </div>
   );
 };
