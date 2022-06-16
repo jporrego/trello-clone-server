@@ -29,12 +29,15 @@ exports.item_detail = function (req, res, next) {
         err.status = 404;
         return next(err);
       }
+      console.log(item);
       // Successful, so send data.
       res.json(item);
     });
 };
 
 exports.item_create_post = function (req, res, next) {
+  console.log(req.body);
+
   let item = new Item({
     name: req.body.name,
     description: req.body.description,
@@ -43,19 +46,5 @@ exports.item_create_post = function (req, res, next) {
     stock: req.body.stock,
     img: req.body.img,
   });
-  Item.findById(req.params.id)
-    .populate("category")
-    .exec(function (err, item) {
-      if (err) {
-        return next(err);
-      }
-      if (item == null) {
-        // No results.
-        var err = new Error("Item");
-        err.status = 404;
-        return next(err);
-      }
-      // Successful, so send data.
-      res.json(item);
-    });
+  item.save();
 };

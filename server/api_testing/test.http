@@ -2,6 +2,14 @@ GET http://localhost:4000/ HTTP/1.1
 
 ###
 
-GET  http://localhost:4000/inventory/item/62a9132de2b83a1acf5b7cfa HTTP/1.1
+GET  http://localhost:4000/item/62a9132de2b83a1acf5b7cfa HTTP/1.1
+
+###
+
+GET  http://localhost:4000/categories HTTP/1.1
+
+###
+
+GET  http://localhost:4000/category/62a7d6390f04ea5a2cf738db HTTP/1.1
 
 ###

@@ -13,9 +13,7 @@ const ItemDetail = () => {
 
   const getItem = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:4000/inventory/item/${params.id}`
-      );
+      const response = await fetch(`http://localhost:4000/item/${params.id}`);
       const data = await response.json();
       setProduct(data);
       console.log(data);
@@ -29,6 +27,7 @@ const ItemDetail = () => {
         <React.Fragment>
           <div className="item_detail__name">{product.name}</div>
           <div className="item_detail__description">{product.description}</div>
+
           <div className="item_detail__price_and_stock">
             <div className="item_detail__price">${product.price}.00</div>
             <div className="item_detail__stock">{product.stock} units</div>

@@ -12,3 +12,12 @@ export interface Product {
   stock: number;
   img: string;
 }
+
+export interface ProductPOST {
+  name: string;
+  description: string;
+  category: Category;
+  price: number;
+  stock: number;
+  img: string;
+}
