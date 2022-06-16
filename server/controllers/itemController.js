@@ -29,15 +29,12 @@ exports.item_detail = function (req, res, next) {
         err.status = 404;
         return next(err);
       }
-      console.log(item);
       // Successful, so send data.
       res.json(item);
     });
 };
 
 exports.item_create_post = function (req, res, next) {
-  console.log(req.body);
-
   let item = new Item({
     name: req.body.name,
     description: req.body.description,
@@ -47,4 +44,22 @@ exports.item_create_post = function (req, res, next) {
     img: req.body.img,
   });
   item.save();
+};
+
+exports.item_update_post = async function (req, res, next) {
+  let updatedItem = {
+    name: req.body.name,
+    description: req.body.description,
+    category: req.body.category,
+    price: req.body.price,
+    stock: req.body.stock,
+    img: req.body.img,
+  };
+  console.log(updatedItem);
+  try {
+    await Item.findOneAndUpdate({ _id: req.params.id }, updatedItem);
+    res.end();
+  } catch (error) {
+    return next(error);
+  }
 };

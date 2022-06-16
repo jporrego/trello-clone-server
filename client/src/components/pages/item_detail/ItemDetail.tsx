@@ -16,7 +16,6 @@ const ItemDetail = () => {
       const response = await fetch(`http://localhost:4000/item/${params.id}`);
       const data = await response.json();
       setProduct(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

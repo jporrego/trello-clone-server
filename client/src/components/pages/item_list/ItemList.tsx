@@ -16,7 +16,6 @@ function ItemList() {
       const response = await fetch("http://localhost:4000/");
       const data = await response.json();
       setProducts(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

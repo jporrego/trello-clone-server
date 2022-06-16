@@ -35,7 +35,6 @@ const ItemEdit = () => {
   useEffect(() => {
     getItemToEdit();
     getCategories();
-    updateValues();
   }, []);
 
   useEffect(() => {
@@ -43,6 +42,7 @@ const ItemEdit = () => {
   }, [item]);
 
   const params = useParams();
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -56,7 +56,6 @@ const ItemEdit = () => {
       const response = await fetch("http://localhost:4000/categories");
       const data = await response.json();
       setCategories(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -66,9 +65,7 @@ const ItemEdit = () => {
     try {
       const response = await fetch(`http://localhost:4000/item/${params.id}`);
       const data = await response.json();
-      console.log(data);
       setItem(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -85,28 +82,24 @@ const ItemEdit = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const response = await fetch(
+      const categoryFetch = await fetch(
         `http://localhost:4000/category/${data.category}`
       );
-      const category: Category = await response.json();
+      const category: Category = await categoryFetch.json();
       const newItem: ProductPOST = { ...data, category: category };
 
-      await fetch("http://localhost:4000/item/create", {
+      await fetch(`http://localhost:4000/item/${params.id}/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newItem),
       });
-
-      //setForm({ name: "", position: "", level: "" });
-      //navigate("/");
+      navigate(`/item/${params.id}`);
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(watch("name"));
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
