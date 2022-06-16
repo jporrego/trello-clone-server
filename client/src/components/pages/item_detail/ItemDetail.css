@@ -5,18 +5,28 @@
     grid-template-areas:
         "name img"
         "description img"
-        "price-stock img"
-        "edit img";
-    max-width: 100rem;
+        "category img"
+        "info img";
+    max-width: 80rem;
     padding: 1rem;
-    margin: 0 auto;
+    margin: 3rem auto;
 }
 
 .item_detail__name {
     font-weight: 700;
 }
 
-.item_detail__price_and_stock {
+.item_detail__category div {
+    background-color: var(--grey);
+    width: fit-content;
+    padding: .25rem .75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: .3rem;
+}
+
+.item_detail__info {
     display: flex;
     gap: 2rem;
 }
@@ -45,5 +55,5 @@
 
 a {
     font-weight: 700;
-    color: var(--brown-dark);
+    color: var(--black);
 }

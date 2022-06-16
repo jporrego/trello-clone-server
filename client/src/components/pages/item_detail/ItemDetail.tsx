@@ -27,10 +27,15 @@ const ItemDetail = () => {
         <React.Fragment>
           <div className="item_detail__name">{product.name}</div>
           <div className="item_detail__description">{product.description}</div>
-          <div className="item_detail__category">{product.category.name}</div>
-          <div className="item_detail__price_and_stock">
+          <div className="item_detail__category">
+            <div>{product.category.name}</div>
+          </div>
+          <div className="item_detail__info">
             <div className="item_detail__price">${product.price}.00</div>
             <div className="item_detail__stock">{product.stock} units</div>
+            <Link className="btn btn-link" to={`/item/edit/${product._id}`}>
+              Edit Item
+            </Link>
           </div>
           <div className="item_detail__img">
             <img
@@ -38,9 +43,6 @@ const ItemDetail = () => {
               alt={product.name}
             />
           </div>
-          <Link className="btn btn-link" to={`/item/edit/${product._id}`}>
-            Edit
-          </Link>
         </React.Fragment>
       )}
     </div>

@@ -13,7 +13,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
   const navigate = useNavigate();
 
   const handleGoToItemDetail = () => {
-    navigate(`/item/detail/${_id}`);
+    navigate(`/item/${_id}`);
   };
 
   return (
@@ -24,7 +24,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
       <div className="product__img">
         <img src={require("../../assets/img/product/" + img)} alt={name} />
       </div>
-      <Link className="btn btn-link" to={`/item/detail/${_id}`}>
+      <Link className="btn btn-link" to={`/item/${_id}`}>
         Details
       </Link>
       <Link className="btn btn-link" to={`/item/edit/${_id}`}>

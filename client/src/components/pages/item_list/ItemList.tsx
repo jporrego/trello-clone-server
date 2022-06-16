@@ -24,14 +24,12 @@ function ItemList() {
 
   return (
     <div className="ItemList">
-      <div>Home</div>
+      <Link to="/item/create">Add Item</Link>
       <div className="product-section">
         {products.map((product) => (
           <Product key={product._id} product={product}></Product>
         ))}
       </div>
-
-      <Link to="/item/create">Create</Link>
     </div>
   );
 }
