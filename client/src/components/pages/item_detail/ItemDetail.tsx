@@ -10,12 +10,24 @@ const ItemDetail = () => {
     getItem();
   }, []);
   const params = useParams();
+  const navigate = useNavigate();
 
   const getItem = async () => {
     try {
       const response = await fetch(`http://localhost:4000/item/${params.id}`);
       const data = await response.json();
       setProduct(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onDelete = async () => {
+    try {
+      await fetch(`http://localhost:4000/item/${params.id}/delete`, {
+        method: "DELETE",
+      });
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -35,6 +47,9 @@ const ItemDetail = () => {
             <Link className="btn btn-link" to={`/item/edit/${product._id}`}>
               Edit Item
             </Link>
+            <div className="delete-btn--text" onClick={onDelete}>
+              Delete
+            </div>
           </div>
           <div className="item_detail__img">
             <img

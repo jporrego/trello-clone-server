@@ -56,4 +56,5 @@
 a {
     font-weight: 700;
     color: var(--black);
+    height: fit-content;
 }

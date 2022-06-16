@@ -21,12 +21,27 @@ function ItemList() {
     }
   };
 
+  const handleDeleteProduct = async (id: string) => {
+    try {
+      await fetch(`http://localhost:4000/item/${id}/delete`, {
+        method: "DELETE",
+      });
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="ItemList">
       <Link to="/item/create">Add Item</Link>
       <div className="product-section">
         {products.map((product) => (
-          <Product key={product._id} product={product}></Product>
+          <Product
+            key={product._id}
+            product={product}
+            handleDeleteProduct={handleDeleteProduct}
+          ></Product>
         ))}
       </div>
     </div>

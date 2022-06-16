@@ -1,12 +1,15 @@
 .product {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50% 1fr max-content;
-    grid-template-areas: "img img"
-        "name name"
-        "price stock";
+    grid-template-rows: 50% 1fr max-content max-content;
+    grid-template-areas:
+        "img     img"
+        "name    name"
+        "details details"
+        "buttons buttons"
+    ;
     background-color: rgb(212, 212, 212);
-    width: 150px;
+    width: 175px;
     height: 200px;
     border-radius: 10px;
     padding: 8px;
@@ -22,14 +25,16 @@
     font-weight: 700;
 }
 
-.product__price {
-    grid-area: price;
+.product__details {
+    grid-area: details;
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
     font-weight: 600;
 }
 
 .product__stock {
-    grid-area: stock;
-    font-weight: 600;
+    color: var(--red);
 }
 
 .product__img {
@@ -41,4 +46,11 @@
 
 .product__img img {
     max-height: 100%;
+}
+
+.product__buttons {
+    grid-area: buttons;
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
 }

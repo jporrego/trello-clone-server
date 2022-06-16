@@ -63,3 +63,12 @@ exports.item_update_post = async function (req, res, next) {
     return next(error);
   }
 };
+
+exports.item_delete_post = async function (req, res, next) {
+  try {
+    await Item.deleteOne({ _id: req.params.id });
+    res.end();
+  } catch (error) {
+    return next(error);
+  }
+};

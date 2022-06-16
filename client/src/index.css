@@ -10,7 +10,7 @@
   --purple-light: #BF7EAE;
   --yellow: #F2A950;
   --red: #e4544a;
-  --grey-dark: #dfdfdf;
+  --grey-dark: #646464;
   --grey: #e4e4e4;
   --brown: #ab7d6e;
   --brown-dark: rgb(131, 56, 34);
@@ -126,4 +126,29 @@ body {
   .btn-back:hover {
     transform: scale(1.075);
   }
+}
+
+
+a {
+  font-weight: 700;
+  color: var(--black);
+  height: fit-content;
+  transition: all 0.1s ease-out;
+}
+
+a:hover {
+  color: var(--grey-dark);
+}
+
+.delete-btn--text {
+  font-weight: 700;
+  color: var(--black);
+  text-decoration: underline;
+  height: fit-content;
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+}
+
+.delete-btn--text:hover {
+  color: var(--grey-dark);
 }
