@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { AdvancedImage } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { fill } from "@cloudinary/url-gen/actions/resize";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router";
 import "./ItemDetail.css";
@@ -11,6 +14,15 @@ const ItemDetail = () => {
   }, []);
   const params = useParams();
   const navigate = useNavigate();
+
+  // ---- Connection to Cloudinary ----
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dzk0haoio",
+    },
+  });
+  let image = cld.image(product && product.img);
+  image.resize(fill().width(150));
 
   const getItem = async () => {
     try {
@@ -52,10 +64,7 @@ const ItemDetail = () => {
             </div>
           </div>
           <div className="item_detail__img">
-            <img
-              src={require("../../../assets/img/product/" + product.img)}
-              alt={product.name}
-            />
+            <AdvancedImage cldImg={image} />
           </div>
         </React.Fragment>
       )}

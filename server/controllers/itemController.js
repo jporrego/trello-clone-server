@@ -5,7 +5,7 @@ var async = require("async");
 
 // Display inventory.
 exports.index = function (req, res, next) {
-  Item.find({}, "name price stock img")
+  Item.find()
     .sort({ name: 1 })
     .populate("category")
     .exec(function (err, result) {
