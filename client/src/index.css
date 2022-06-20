@@ -153,3 +153,11 @@ a:hover {
 .delete-btn--text:hover {
   color: var(--grey-dark);
 }
+
+.hover-scale-small {
+  transition: .15s ease-out;
+}
+
+.hover-scale-small:hover {
+  transform: scale(1.04)
+}
