@@ -29,7 +29,6 @@
 }
 
 .inventory-content {
-    background-color: yellow;
     max-height: 100%;
     overflow: auto;
 }

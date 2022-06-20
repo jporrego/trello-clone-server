@@ -34,15 +34,13 @@ function ItemList() {
 
   return (
     <div className="item-list">
-      <div className="product-section">
-        {products.map((product) => (
-          <Product
-            key={product._id}
-            product={product}
-            handleDeleteProduct={handleDeleteProduct}
-          ></Product>
-        ))}
-      </div>
+      {products.map((product) => (
+        <Product
+          key={product._id}
+          product={product}
+          handleDeleteProduct={handleDeleteProduct}
+        ></Product>
+      ))}
     </div>
   );
 }
