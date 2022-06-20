@@ -34,7 +34,6 @@ function ItemList() {
 
   return (
     <div className="ItemList">
-      <Link to="/item/create">Add Item</Link>
       <div className="product-section">
         {products.map((product) => (
           <Product

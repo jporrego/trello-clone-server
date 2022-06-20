@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Inventory from "./components/inventory/Inventory";
 import Navbar from "./components/navbar/Navbar";
 import ItemCreate from "./components/pages/item_create/ItemCreate";
 import ItemDetail from "./components/pages/item_detail/ItemDetail";
@@ -13,7 +14,7 @@ function App() {
       <Navbar></Navbar>
       <div className="content">
         <Routes>
-          <Route path="/" element={<ItemList />} />
+          <Route path="/" element={<Inventory />} />
           <Route path="/item/edit/:id" element={<ItemEdit />} />
           <Route path="/item/:id" element={<ItemDetail />} />
           <Route path="/item/create/" element={<ItemCreate />} />
