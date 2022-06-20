@@ -1,6 +1,6 @@
 .logo {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: .75rem;
     font-family: var(--font-secondary);
     font-size: 2.4rem;
@@ -11,4 +11,9 @@
 .logo img {
     width: auto;
     height: 4rem;
+}
+
+.logo-name {
+    font-size: 2rem;
+    color: var(--brown-dark);
 }

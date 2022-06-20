@@ -9,8 +9,8 @@
 .profile-picture {
     display: flex;
     justify-content: center;
-    height: 50%;
-    min-height: 5rem;
+    height: clamp(5rem, 50%, 7rem);
+    cursor: pointer;
 }
 
 .profile-picture img {
@@ -21,4 +21,5 @@
 .user-name {
     font-size: 1.8rem;
     font-weight: 800;
+    cursor: pointer;
 }

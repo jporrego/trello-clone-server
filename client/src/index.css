@@ -154,10 +154,10 @@ a:hover {
   color: var(--grey-dark);
 }
 
-.hover-scale-small {
+.hover-translate-y {
   transition: .15s ease-out;
 }
 
-.hover-scale-small:hover {
-  transform: scale(1.04)
+.hover-translate-y:hover {
+  transform: translateY(-1.5px)
 }
