@@ -8,8 +8,7 @@
 }
 
 .content {
-
-  height: 96%;
+  height: 96vh;
   display: flex;
   flex-direction: column;
   align-items: center;

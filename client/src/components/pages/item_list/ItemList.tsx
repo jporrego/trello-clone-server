@@ -33,7 +33,7 @@ function ItemList() {
   };
 
   return (
-    <div className="ItemList">
+    <div className="item-list">
       <div className="product-section">
         {products.map((product) => (
           <Product
