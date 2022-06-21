@@ -21,7 +21,7 @@ const ItemDetail = () => {
       cloudName: "dzk0haoio",
     },
   });
-  let image = cld.image(product && product.img);
+  let image = cld.image(product && "coffee-shop-images/" + product.img);
   image.resize(fill().width(150));
 
   const getItem = async () => {

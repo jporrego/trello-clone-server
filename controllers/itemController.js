@@ -35,21 +35,28 @@ exports.item_detail = function (req, res, next) {
 };
 
 exports.item_create_post = function (req, res, next) {
-  let item = new Item({
-    name: req.body.name,
-    description: req.body.description,
-    category: req.body.category,
-    price: req.body.price,
-    stock: req.body.stock,
-    img: req.body.img,
-  });
-  item.save();
+  try {
+    let item = new Item({
+      name: req.body.name,
+      description: req.body.description,
+      brand: req.body.brand,
+      category: req.body.category,
+      price: req.body.price,
+      stock: req.body.stock,
+      img: req.body.img,
+    });
+    item.save();
+    res.end();
+  } catch (error) {
+    return next(error);
+  }
 };
 
 exports.item_update_post = async function (req, res, next) {
   let updatedItem = {
     name: req.body.name,
     description: req.body.description,
+    brand: req.body.brand,
     category: req.body.category,
     price: req.body.price,
     stock: req.body.stock,

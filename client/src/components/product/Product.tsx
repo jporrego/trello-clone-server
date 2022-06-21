@@ -20,7 +20,7 @@ const Product: React.FC<ProductProps> = ({ product, handleDeleteProduct }) => {
       cloudName: "dzk0haoio",
     },
   });
-  let image = cld.image(img);
+  let image = cld.image("coffee-shop-images/" + img);
   image.resize(fill().width(80));
 
   return (

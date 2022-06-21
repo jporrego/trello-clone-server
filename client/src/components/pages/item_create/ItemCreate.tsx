@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import "./ItemCreate.css";
+import { useParams, useNavigate } from "react-router";
 import { ProductPOST, Category } from "../../../types";
+import "./ItemCreate.css";
 
 type Inputs = {
   name: string;
   description: string;
+  brand: string;
   category: string;
   price: number;
   stock: number;
@@ -25,6 +27,8 @@ const ItemCreate = () => {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const navigate = useNavigate();
 
   const getCategories = async () => {
     try {
@@ -52,9 +56,7 @@ const ItemCreate = () => {
         },
         body: JSON.stringify(newItem),
       });
-
-      //setForm({ name: "", position: "", level: "" });
-      //navigate("/");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +71,10 @@ const ItemCreate = () => {
       <label htmlFor="name">Item Name</label>
       <input {...register("name", { required: true })} />
       {errors.name && <span>Name is required</span>}
+
+      <label htmlFor="brand">Brand</label>
+      <input {...register("brand", { required: true })} />
+      {errors.brand && <span>Brand is required</span>}
 
       {/* include validation with required or other standard HTML validation rules */}
       <label>Description</label>

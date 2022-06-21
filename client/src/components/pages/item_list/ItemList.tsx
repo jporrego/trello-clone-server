@@ -23,9 +23,13 @@ function ItemList() {
 
   const handleDeleteProduct = async (id: string) => {
     try {
+      //Disabled for safety
+
+      /*
       await fetch(`http://localhost:4000/item/${id}/delete`, {
         method: "DELETE",
       });
+      */
       getProducts();
     } catch (error) {
       console.log(error);
