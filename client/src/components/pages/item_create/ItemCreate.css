@@ -4,7 +4,7 @@
     align-items: start;
     gap: 1rem;
     max-width: 40rem;
-    background-color: var(--grey);
+    background-color: var(--white);
     padding: 1rem;
     margin: 3rem auto;
     border-radius: .5rem;
@@ -16,6 +16,7 @@
 
 .item-create-form input, .item-create-form select, .item-create-form textarea {
     font-family: var(--font-primary);
+    background-color: var(--grey-light);
     width: 25rem;
     padding: .5rem;
     border-style: none;

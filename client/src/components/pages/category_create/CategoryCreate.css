@@ -4,7 +4,7 @@
     align-categorys: start;
     gap: 1rem;
     max-width: 40rem;
-    background-color: var(--grey);
+    background-color: var(--white);
     padding: 1rem;
     margin: 3rem auto;
     border-radius: .5rem;
@@ -14,33 +14,13 @@
     font-weight: 700;
 }
 
-.category-create-form input, .category-create-form select, .category-create-form textarea {
+.category-create-form input {
     font-family: var(--font-primary);
+    background-color: var(--grey-light);
     width: 25rem;
     padding: .5rem;
     border-style: none;
     border-radius: .25rem;
-}
-
-.category-create-form select {
-    text-transform: capitalize;
-}
-
-.category-create-form textarea {
-    min-height: 10rem;
-    max-height: 15rem;
-    min-width: 25rem;
-    max-width: 25rem;
-}
-
-.category-create-form input[type=submit] {
-    cursor: pointer;
-    transition: all .1s ease-out;
-    margin-top: 1rem;
-    width: fit-content;
-    margin: 1rem auto 0rem auto;
-    background-color: var(--white);
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, .15);
 }
 
 .category-create-form input[type=submit]:hover {
