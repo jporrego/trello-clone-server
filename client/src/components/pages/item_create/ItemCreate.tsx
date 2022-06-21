@@ -43,12 +43,15 @@ const ItemCreate = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
+      // First we fetch the category by id (data.category).
+      // Then we add the category object to the newItem object.
       const response = await fetch(
         `http://localhost:4000/category/${data.category}`
       );
       const category: Category = await response.json();
       const newItem: ProductPOST = { ...data, category: category };
-
+      console.log(data);
+      /*
       await fetch("http://localhost:4000/item/create", {
         method: "POST",
         headers: {
@@ -56,7 +59,7 @@ const ItemCreate = () => {
         },
         body: JSON.stringify(newItem),
       });
-      navigate("/");
+      navigate("/");*/
     } catch (error) {
       console.log(error);
     }

@@ -31,7 +31,34 @@ exports.category_detail = function (req, res, next) {
   });
 };
 
-exports.item_create_post = function (req, res, next) {
+exports.category_detail_by_name = function (req, res, next) {
+  Category.findOne({ name: req.params.name }).exec(function (err, result) {
+    if (err) {
+      return next(err);
+    }
+    if (result == null) {
+      // No results.
+      res.sendStatus(204);
+      return;
+    }
+    res.json(result);
+  });
+};
+
+exports.category_create_post = function (req, res, next) {
+  try {
+    let category = new Category({
+      name: req.body.name,
+    });
+    console.log(category);
+    category.save();
+    res.end();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+/*exports.item_create_post = function (req, res, next) {
   let item = new Item({
     name: req.body.name,
     description: req.body.description,
@@ -56,3 +83,4 @@ exports.item_create_post = function (req, res, next) {
       res.json(item);
     });
 };
+*/

@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { fill } from "@cloudinary/url-gen/actions/resize";
-import "./Product.css";
 import { Product as ProductInterface } from "../../types";
+import { CgDetailsMore } from "react-icons/cg";
+import { AiFillEdit } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
+import "./Product.css";
 
 interface ProductProps {
   product: ProductInterface;
@@ -34,17 +37,21 @@ const Product: React.FC<ProductProps> = ({ product, handleDeleteProduct }) => {
       </div>
       <div className="product__buttons">
         <Link className="btn btn-link" to={`/item/${_id}`}>
+          <CgDetailsMore></CgDetailsMore>
           Details
         </Link>
         <Link className="btn btn-link" to={`/item/edit/${_id}`}>
+          <AiFillEdit></AiFillEdit>
           Edit
         </Link>
-        <div
+        <Link
+          to={"#"}
           className="delete-btn--text"
           onClick={() => handleDeleteProduct(_id)}
         >
+          <AiFillDelete></AiFillDelete>
           Delete
-        </div>
+        </Link>
       </div>
       <div className="product__img">
         <AdvancedImage cldImg={image} />

@@ -1,15 +1,15 @@
 .product {
     display: grid;
-    grid-template-columns: 20% 1fr 30%;
+    grid-template-columns: 20% 1fr 14%;
     grid-template-rows: 1fr;
     grid-template-areas:
         "img details buttons";
     background-color: var(--grey-light);
-    border-left: 0rem solid var(--brown-light);
-    width: 100%;
+    width: 90%;
     height: 10rem;
     border-radius: 1rem;
     font-size: 1.4rem;
+    align-self: center;
 
 }
 
@@ -23,7 +23,6 @@
 }
 
 .product__name {
-
     font-weight: 700;
 }
 
@@ -53,6 +52,24 @@
 .product__buttons {
     grid-area: buttons;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    align-self: center;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.product__buttons a {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background-color: var(--grey-light);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 1);
+    width: 80%;
+    border-radius: .4rem;
+    padding: .2rem;
+}
+
+.product__buttons svg {
+    display: none;
+    font-size: 1.6rem;
 }

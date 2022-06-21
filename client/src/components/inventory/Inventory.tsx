@@ -9,6 +9,7 @@ const Inventory = () => {
       <div className="inventory-header">
         <div className="inventory-title">Inventory</div>
         <Link to="/item/create">Add Item</Link>
+        <Link to="/category/create">Add Category</Link>
       </div>
       <div className="inventory-content">
         <ItemList></ItemList>
