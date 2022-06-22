@@ -57,6 +57,9 @@ router.get("/categories", category_controller.category_list);
 
 /// brand ROUTES ///
 
+// GET request for one category by id.
+router.get("/brand/:id", brand_controller.brand_detail);
+
 // GET request for list of all categorys.
 router.get("/brands", brand_controller.brand_list);
 module.exports = router;

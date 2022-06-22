@@ -7,7 +7,7 @@ var async = require("async");
 exports.index = function (req, res, next) {
   Item.find()
     .sort({ name: 1 })
-    .populate("category")
+    .populate("category brand")
     .exec(function (err, result) {
       if (err) {
         return next(err);
@@ -18,7 +18,7 @@ exports.index = function (req, res, next) {
 
 exports.item_detail = function (req, res, next) {
   Item.findById(req.params.id)
-    .populate("category")
+    .populate("category brand")
     .exec(function (err, item) {
       if (err) {
         return next(err);

@@ -33,9 +33,6 @@ const ItemCreate = () => {
 
   const getCategoriesAndBrands = async () => {
     try {
-      //const response = await fetch("http://localhost:4000/categories");
-      //const data = await response.json();
-      //setCategories(data);
       const response = await Promise.all([
         fetch("http://localhost:4000/categories"),
         fetch("http://localhost:4000/brands"),
@@ -51,15 +48,22 @@ const ItemCreate = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      // First we fetch the category by id (data.category).
-      // Then we add the category object to the newItem object.
-      const response = await fetch(
-        `http://localhost:4000/category/${data.category}`
-      );
-      const category: Category = await response.json();
-      const newItem: ProductPOST = { ...data, category: category };
-      console.log(data);
-      /*
+      // First we fetch the category and brand by id (data.category).
+      // Then we add them object to the newItem object.
+
+      const response = await Promise.all([
+        fetch(`http://localhost:4000/category/${data.category}`),
+        fetch(`http://localhost:4000/brand/${data.brand}`),
+      ]);
+      console.log(response);
+      const categoryData: Category = await response[0].json();
+      const brandData: Brand = await response[1].json();
+      const newItem: ProductPOST = {
+        ...data,
+        category: categoryData,
+        brand: brandData,
+      };
+
       await fetch("http://localhost:4000/item/create", {
         method: "POST",
         headers: {
@@ -67,7 +71,7 @@ const ItemCreate = () => {
         },
         body: JSON.stringify(newItem),
       });
-      navigate("/");*/
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

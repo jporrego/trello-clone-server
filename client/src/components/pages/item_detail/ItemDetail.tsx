@@ -49,10 +49,13 @@ const ItemDetail = () => {
       {product && (
         <React.Fragment>
           <div className="item_detail__name">{product.name}</div>
-          <div className="item_detail__description">{product.description}</div>
           <div className="item_detail__category">
             <div>{product.category.name}</div>
           </div>
+          <div className="item_detail__category">
+            <div>{product.brand.name}</div>
+          </div>
+          <div className="item_detail__description">{product.description}</div>
           <div className="item_detail__info">
             <div className="item_detail__price">${product.price}.00</div>
             <div className="item_detail__stock">{product.stock} units</div>

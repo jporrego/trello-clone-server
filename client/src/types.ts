@@ -11,8 +11,9 @@ export interface Brand {
 export interface Product {
   _id: string;
   name: string;
-  description: string;
   category: Category;
+  brand: Brand;
+  description: string;
   price: number;
   stock: number;
   img: string;
@@ -20,8 +21,9 @@ export interface Product {
 
 export interface ProductPOST {
   name: string;
-  description: string;
   category: Category;
+  brand: Brand;
+  description: string;
   price: number;
   stock: number;
   img: string;

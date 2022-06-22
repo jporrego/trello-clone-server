@@ -21,11 +21,15 @@ const ItemEdit = () => {
   const [item, setItem] = useState<ProductInteface>({
     _id: "",
     name: "",
-    description: "",
     category: {
       _id: "",
       name: "",
     },
+    brand: {
+      _id: "",
+      name: "",
+    },
+    description: "",
     price: 0,
     stock: 0,
     img: "",
@@ -81,7 +85,8 @@ const ItemEdit = () => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try {
+    /*try {
+       EDIT TO MATCH NEW BRAND MODEL ----------------------
       const categoryFetch = await fetch(
         `http://localhost:4000/category/${data.category}`
       );
@@ -98,7 +103,7 @@ const ItemEdit = () => {
       navigate(`/item/${params.id}`);
     } catch (error) {
       console.log(error);
-    }
+    }*/
   };
 
   return (
