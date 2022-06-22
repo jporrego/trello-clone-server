@@ -10,7 +10,7 @@
     height: 8rem;
     border-radius: 1rem;
     font-size: 1.3rem;
-    align-self: center;
+    align-self: flex-start;
 }
 
 .product__name {
@@ -77,12 +77,12 @@
 
 @media only screen and (min-width: 1024px) {
     .product {
-        height: 10rem;
+        /* height: 10rem; */
     }
 
     .product__img {
         grid-area: img;
-        max-height: 10rem;
+        /* max-height: 10rem; */
         display: flex;
         justify-content: center;
         padding: 1rem;
@@ -107,10 +107,10 @@
     .product {
         font-size: 1.8rem;
     }
-}
 
-@media only screen and (min-width: 1600px) {
     .product {
         align-self: flex-start;
     }
 }
+
+@media only screen and (min-width: 1600px) {}
