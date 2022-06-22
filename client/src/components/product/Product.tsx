@@ -28,12 +28,10 @@ const Product: React.FC<ProductProps> = ({ product, handleDeleteProduct }) => {
 
   return (
     <div className="product">
+      <div className="product__name">{name}</div>
       <div className="product__details">
-        <div className="product__name">{name}</div>
-        <div className="product__price-stock">
-          <div className="product__price">${price}.00</div>
-          <div className="product__stock">{stock} units</div>
-        </div>
+        <div className="product__price">${price}.00</div>
+        <div className="product__stock">{stock} units</div>
       </div>
       <div className="product__buttons">
         <Link className="btn btn-link" to={`/item/${_id}`}>
