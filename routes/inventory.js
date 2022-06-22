@@ -1,9 +1,10 @@
-var express = require("express");
-var router = express.Router();
+let express = require("express");
+let router = express.Router();
 
 // Require controller modules.
-var item_controller = require("../controllers/itemController");
-var category_controller = require("../controllers/categoryController");
+let item_controller = require("../controllers/itemController");
+let category_controller = require("../controllers/categoryController");
+let brand_controller = require("../controllers/brandController");
 
 /// ITEM ROUTES ///
 
@@ -54,4 +55,8 @@ router.get("/category/name/:name", category_controller.category_detail_by_name);
 // GET request for list of all categorys.
 router.get("/categories", category_controller.category_list);
 
+/// brand ROUTES ///
+
+// GET request for list of all categorys.
+router.get("/brands", brand_controller.brand_list);
 module.exports = router;

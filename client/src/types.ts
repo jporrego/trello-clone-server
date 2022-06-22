@@ -3,6 +3,11 @@ export interface Category {
   name: string;
 }
 
+export interface Brand {
+  _id: string;
+  name: string;
+}
+
 export interface Product {
   _id: string;
   name: string;

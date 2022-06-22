@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useParams, useNavigate } from "react-router";
-import { ProductPOST, Category } from "../../../types";
+import { ProductPOST, Category, Brand } from "../../../types";
 import "./ItemCreate.css";
 
 type Inputs = {
@@ -16,9 +16,10 @@ type Inputs = {
 
 const ItemCreate = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [brands, setBrands] = useState<Brand[]>([]);
 
   useEffect(() => {
-    getCategories();
+    getCategoriesAndBrands();
   }, []);
 
   const {
@@ -30,12 +31,19 @@ const ItemCreate = () => {
 
   const navigate = useNavigate();
 
-  const getCategories = async () => {
+  const getCategoriesAndBrands = async () => {
     try {
-      const response = await fetch("http://localhost:4000/categories");
-      const data = await response.json();
-      setCategories(data);
-      console.log(data);
+      //const response = await fetch("http://localhost:4000/categories");
+      //const data = await response.json();
+      //setCategories(data);
+      const response = await Promise.all([
+        fetch("http://localhost:4000/categories"),
+        fetch("http://localhost:4000/brands"),
+      ]);
+      const categoryData = await response[0].json();
+      const brandData = await response[1].json();
+      setCategories(categoryData);
+      setBrands(brandData);
     } catch (error) {
       console.log(error);
     }
@@ -76,13 +84,14 @@ const ItemCreate = () => {
       {errors.name && <span>Name is required</span>}
 
       <label htmlFor="brand">Brand</label>
-      <input {...register("brand", { required: true })} />
+      <select {...register("brand", { required: true })}>
+        {brands.map((brand) => (
+          <option value={brand._id} key={brand._id}>
+            {brand.name}
+          </option>
+        ))}
+      </select>
       {errors.brand && <span>Brand is required</span>}
-
-      {/* include validation with required or other standard HTML validation rules */}
-      <label>Description</label>
-      <textarea {...register("description", { required: true })} />
-      {errors.description && <span>Name is required</span>}
 
       <label>Category</label>
       <select {...register("category", { required: true })}>
@@ -92,6 +101,12 @@ const ItemCreate = () => {
           </option>
         ))}
       </select>
+      {errors.category && <span>Category is required</span>}
+
+      {/* include validation with required or other standard HTML validation rules */}
+      <label>Description</label>
+      <textarea {...register("description", { required: true })} />
+      {errors.description && <span>Name is required</span>}
 
       <label>Price</label>
       <input {...register("price", { required: true, min: 0 })} />
