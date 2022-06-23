@@ -10,7 +10,7 @@ const Inventory = () => {
       <div className="inventory-buttons">
         <Link to="/item/create">Add Item</Link>
         <Link to="/category/create">Add Category</Link>
-        <Link to="/category/create">Add Brand</Link>
+        <Link to="/brand/create">Add Brand</Link>
       </div>
       <div className="inventory-content">
         <ItemList></ItemList>

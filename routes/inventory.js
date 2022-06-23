@@ -57,8 +57,14 @@ router.get("/categories", category_controller.category_list);
 
 /// brand ROUTES ///
 
+// POST request for creating category.
+router.post("/brand/create", brand_controller.brand_create_post);
+
 // GET request for one category by id.
 router.get("/brand/:id", brand_controller.brand_detail);
+
+// GET request for one category by name.
+router.get("/brand/name/:name", brand_controller.brand_detail_by_name);
 
 // GET request for list of all categorys.
 router.get("/brands", brand_controller.brand_list);

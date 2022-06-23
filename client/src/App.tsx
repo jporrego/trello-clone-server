@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Brands from "./components/brands/Brands";
+import BrandCreate from "./components/brands/brand_create/BrandCreate";
 import Categories from "./components/categories/Categories";
 import Inventory from "./components/inventory/Inventory";
 import Navbar from "./components/navbar/Navbar";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/category/create/" element={<CategoryCreate />} />
           <Route path="/brands" element={<Brands />} />
+          <Route path="/brand/create/" element={<BrandCreate />} />
         </Routes>
       </div>
     </div>

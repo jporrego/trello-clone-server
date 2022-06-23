@@ -1,10 +1,23 @@
+.category-create {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 75rem;
+    height: 100%;
+    border-radius: 2rem;
+    padding: 2rem;
+    background-color: var(--white);
+}
+
 .category-create-form {
     display: flex;
     flex-direction: column;
-    align-categorys: start;
+    align-items: start;
     gap: 1rem;
     max-width: 40rem;
-    background-color: var(--white);
+    background-color: var(--grey-light);
     padding: 1rem;
     margin: 3rem auto;
     border-radius: .5rem;
@@ -16,21 +29,9 @@
 
 .category-create-form input {
     font-family: var(--font-primary);
-    background-color: var(--grey-light);
+    background-color: var(--white);
     width: 25rem;
     padding: .5rem;
     border-style: none;
     border-radius: .25rem;
-}
-
-.category-create-form input[type=submit]:hover {
-    transform: translateY(-1px);
-
-}
-
-.category-create-form input[type=submit]:active {
-    transform: translateY(-0px);
-    filter: brightness(.9);
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
-
 }

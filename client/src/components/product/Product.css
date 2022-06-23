@@ -7,9 +7,10 @@
         "img details buttons";
     background-color: var(--grey-light);
     width: 90%;
-    height: 8rem;
+    max-width: 60rem;
+    height: 6rem;
     border-radius: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     align-self: flex-start;
 }
 
@@ -36,7 +37,7 @@
 
 .product__img {
     grid-area: img;
-    max-height: 8rem;
+    max-height: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,7 +106,7 @@
 
 @media only screen and (min-width: 1440px) {
     .product {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
     }
 
     .product {

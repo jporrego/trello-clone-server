@@ -77,55 +77,49 @@ const ItemCreate = () => {
     }
   };
 
-  console.log(watch("name"));
-
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form onSubmit={handleSubmit(onSubmit)} className="item-create-form">
-      {/* register your input into the hook by invoking the "register" function */}
-      <label htmlFor="name">Item Name</label>
-      <input {...register("name", { required: true })} />
-      {errors.name && <span>Name is required</span>}
-
-      <label htmlFor="brand">Brand</label>
-      <select {...register("brand", { required: true })}>
-        {brands.map((brand) => (
-          <option value={brand._id} key={brand._id}>
-            {brand.name}
-          </option>
-        ))}
-      </select>
-      {errors.brand && <span>Brand is required</span>}
-
-      <label>Category</label>
-      <select {...register("category", { required: true })}>
-        {categories.map((category) => (
-          <option value={category._id} key={category._id}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-      {errors.category && <span>Category is required</span>}
-
-      {/* include validation with required or other standard HTML validation rules */}
-      <label>Description</label>
-      <textarea {...register("description", { required: true })} />
-      {errors.description && <span>Name is required</span>}
-
-      <label>Price</label>
-      <input {...register("price", { required: true, min: 0 })} />
-      {errors.description && <span>Price is required</span>}
-
-      <label>Stock</label>
-      <input {...register("stock", { required: true, min: 0 })} />
-      {errors.description && <span>Stock is required</span>}
-
-      <label>Img(URL)</label>
-      <input {...register("img", { required: false })} />
-      {errors.description && <span>Stock is required</span>}
-
-      <input type="submit" />
-    </form>
+    <div className="item-create">
+      <div className="form-title">Add New Item</div>
+      {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
+      <form onSubmit={handleSubmit(onSubmit)} className="item-create-form">
+        {/* register your input into the hook by invoking the "register" function */}
+        <label htmlFor="name">Item Name</label>
+        <input {...register("name", { required: true })} />
+        {errors.name && <span>Name is required</span>}
+        <label htmlFor="brand">Brand</label>
+        <select {...register("brand", { required: true })}>
+          {brands.map((brand) => (
+            <option value={brand._id} key={brand._id}>
+              {brand.name}
+            </option>
+          ))}
+        </select>
+        {errors.brand && <span>Brand is required</span>}
+        <label>Category</label>
+        <select {...register("category", { required: true })}>
+          {categories.map((category) => (
+            <option value={category._id} key={category._id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+        {errors.category && <span>Category is required</span>}
+        {/* include validation with required or other standard HTML validation rules */}
+        <label>Description</label>
+        <textarea {...register("description", { required: true })} />
+        {errors.description && <span>Name is required</span>}
+        <label>Price</label>
+        <input {...register("price", { required: true, min: 0 })} />
+        {errors.description && <span>Price is required</span>}
+        <label>Stock</label>
+        <input {...register("stock", { required: true, min: 0 })} />
+        {errors.description && <span>Stock is required</span>}
+        <label>Img(URL)</label>
+        <input {...register("img", { required: false })} />
+        {errors.description && <span>Stock is required</span>}
+        <input type="submit" />
+      </form>
+    </div>
   );
 };
 

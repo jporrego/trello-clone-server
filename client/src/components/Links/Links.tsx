@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 
 const Links = () => {
   const location = useLocation();
-  console.log(location.pathname);
 
   return (
     <div className="links">
