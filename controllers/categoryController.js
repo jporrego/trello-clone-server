@@ -45,14 +45,20 @@ exports.category_detail_by_name = function (req, res, next) {
   });
 };
 
-exports.category_create_post = function (req, res, next) {
+exports.category_create_post = async function (req, res, next) {
   try {
-    let category = new Category({
+    const existingCategory = await Category.findOne({
       name: req.body.name,
-    });
-    console.log(category);
-    category.save();
-    res.end();
+    }).exec();
+    if (existingCategory !== null) {
+      res.sendStatus(409);
+    } else {
+      let category = new Category({
+        name: req.body.name,
+      });
+      category.save();
+      res.end();
+    }
   } catch (error) {
     return next(error);
   }

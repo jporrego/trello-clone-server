@@ -20,21 +20,16 @@ const CategoryCreate = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      // We check if the category name already exists before creating.
-      // If it does, show error. If it doesn't (status 204), create it.
-      const response = await fetch(
-        `http://localhost:4000/category/name/${data.name}`
-      );
-      if (response.status === 200) {
-        //showError()
-      } else if (response.status === 204) {
-        await fetch("http://localhost:4000/category/create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
+      const res = await fetch(`http://localhost:4000/category/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (res.status !== 200) {
+        throw new Error("Already exists");
+      } else {
         navigate("/");
       }
     } catch (error) {

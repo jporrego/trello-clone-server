@@ -20,9 +20,6 @@ const BrandCreate = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      // We check if the category name already exists before creating.
-      // If it does, show error. If it doesn't (status 204), create it.
-
       const res = await fetch(`http://localhost:4000/brand/create`, {
         method: "POST",
         headers: {
@@ -30,7 +27,6 @@ const BrandCreate = () => {
         },
         body: JSON.stringify(data),
       });
-      console.log(res);
       if (res.status !== 200) {
         throw new Error("Already exists");
       } else {
