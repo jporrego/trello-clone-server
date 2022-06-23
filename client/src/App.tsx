@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Brands from "./components/brands/Brands";
+import Categories from "./components/categories/Categories";
 import Inventory from "./components/inventory/Inventory";
 import Navbar from "./components/navbar/Navbar";
 import CategoryCreate from "./components/pages/category_create/CategoryCreate";
@@ -19,7 +21,9 @@ function App() {
           <Route path="/item/edit/:id" element={<ItemEdit />} />
           <Route path="/item/:id" element={<ItemDetail />} />
           <Route path="/item/create/" element={<ItemCreate />} />
+          <Route path="/categories" element={<Categories />} />
           <Route path="/category/create/" element={<CategoryCreate />} />
+          <Route path="/brands" element={<Brands />} />
         </Routes>
       </div>
     </div>
