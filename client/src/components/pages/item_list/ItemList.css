@@ -5,6 +5,8 @@
     max-width: 100rem;
     height: 100%;
     gap: 1rem;
+    padding: 2rem;
+    overflow: auto;
 }
 
 .item-list>a {

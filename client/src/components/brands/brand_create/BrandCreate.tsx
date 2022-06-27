@@ -30,7 +30,7 @@ const BrandCreate = () => {
       if (res.status !== 200) {
         throw new Error("Already exists");
       } else {
-        navigate("/");
+        navigate("/brands");
       }
     } catch (error) {
       console.log(error);

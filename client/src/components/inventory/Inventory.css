@@ -38,8 +38,7 @@
 
 .inventory-content {
     max-height: 100%;
-    overflow: auto;
-    padding: 2rem;
+    /* overflow: auto; */
     border-radius: 2rem;
     background-color: var(--grey-light)
 }

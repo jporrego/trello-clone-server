@@ -30,7 +30,7 @@ const CategoryCreate = () => {
       if (res.status !== 200) {
         throw new Error("Already exists");
       } else {
-        navigate("/");
+        navigate("/categories");
       }
     } catch (error) {
       console.log(error);
