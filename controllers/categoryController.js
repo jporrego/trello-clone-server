@@ -64,29 +64,22 @@ exports.category_create_post = async function (req, res, next) {
   }
 };
 
-/*exports.item_create_post = function (req, res, next) {
-  let item = new Item({
-    name: req.body.name,
-    description: req.body.description,
-    category: req.body.category,
-    price: req.body.price,
-    stock: req.body.stock,
-    img: req.body.img,
-  });
-  Item.findById(req.params.id)
-    .populate("category")
-    .exec(function (err, item) {
-      if (err) {
-        return next(err);
-      }
-      if (item == null) {
-        // No results.
-        var err = new Error("Item");
-        err.status = 404;
-        return next(err);
-      }
-      // Successful, so send data.
-      res.json(item);
-    });
+exports.category_delete_post = async function (req, res, next) {
+  try {
+    const item = await Item.find({
+      category: req.params.id,
+    }).exec();
+
+    if (item.length > 0) {
+      //throw new Error("Can't delete this category because other documents reference it.");
+      res.status(409).send({
+        message: "Can't delete this category because other items reference it.",
+      });
+    } else {
+      await Category.deleteOne({ _id: req.params.id });
+      res.end();
+    }
+  } catch (error) {
+    return next(error);
+  }
 };
-*/

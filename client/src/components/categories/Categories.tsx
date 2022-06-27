@@ -25,11 +25,13 @@ const Categories = () => {
     try {
       //Disabled for safety
 
-      /*
-      await fetch(`http://localhost:4000/category/${id}/delete`, {
-        method: "DELETE",
+      const res = await fetch(`http://localhost:4000/category/${id}/delete`, {
+        method: "POST",
       });
-      */
+      if (res.status === 409) {
+        const data = await res.json();
+        data.message && console.log(data.message);
+      }
       getCategories();
     } catch (error) {
       console.log(error);
