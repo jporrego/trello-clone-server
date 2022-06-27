@@ -60,3 +60,23 @@ exports.brand_create_post = async function (req, res, next) {
     return next(error);
   }
 };
+
+exports.brand_delete_post = async function (req, res, next) {
+  try {
+    const existingItems = await Item.find({
+      brand: req.params.id,
+    }).exec();
+
+    if (existingItems.length > 0) {
+      //throw new Error("Can't delete this category because other documents reference it.");
+      res.status(409).json({
+        message: "Can't delete this category because other items reference it.",
+      });
+    } else {
+      await Brand.deleteOne({ _id: req.params.id });
+      res.end();
+    }
+  } catch (error) {
+    return next(error);
+  }
+};

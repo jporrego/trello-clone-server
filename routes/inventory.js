@@ -42,15 +42,19 @@ router.get("/category/:id", category_controller.category_detail);
 
 /// -------------------------- BRAND ROUTES -------------------------- ///
 
+// GET request for list of all categorys.
+router.get("/brands", brand_controller.brand_list);
+
 // POST request for creating category.
 router.post("/brand/create", brand_controller.brand_create_post);
-
-// GET request for one category by id.
-router.get("/brand/:id", brand_controller.brand_detail);
 
 // GET request for one category by name.
 router.get("/brand/name/:name", brand_controller.brand_detail_by_name);
 
-// GET request for list of all categorys.
-router.get("/brands", brand_controller.brand_list);
+// POST request to delete category.
+router.post("/brand/:id/delete", brand_controller.brand_delete_post);
+
+// GET request for one category by id.
+router.get("/brand/:id", brand_controller.brand_detail);
+
 module.exports = router;

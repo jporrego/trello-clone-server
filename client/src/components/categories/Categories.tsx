@@ -28,7 +28,12 @@ const Categories = () => {
       const res = await fetch(`http://localhost:4000/category/${id}/delete`, {
         method: "POST",
       });
-      if (res.status === 409) {
+      let contentType = res.headers.get("content-type");
+      if (contentType === null) {
+        contentType = "";
+      }
+
+      if (res.status !== 200) {
         const data = await res.json();
         data.message && console.log(data.message);
       }

@@ -66,13 +66,13 @@ exports.category_create_post = async function (req, res, next) {
 
 exports.category_delete_post = async function (req, res, next) {
   try {
-    const item = await Item.find({
+    const existingItems = await Item.find({
       category: req.params.id,
     }).exec();
 
-    if (item.length > 0) {
+    if (existingItems.length > 0) {
       //throw new Error("Can't delete this category because other documents reference it.");
-      res.status(409).send({
+      res.status(409).json({
         message: "Can't delete this category because other items reference it.",
       });
     } else {
