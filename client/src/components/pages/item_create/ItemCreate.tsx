@@ -18,6 +18,7 @@ type Inputs = {
 const ItemCreate = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     getCategoriesAndBrands();
@@ -51,6 +52,7 @@ const ItemCreate = () => {
     try {
       // First we fetch the category and brand by id (data.category).
       // Then we add them object to the newItem object.
+      setLoading(true);
       const response = await Promise.all([
         fetch(`http://localhost:4000/category/${data.category}`),
         fetch(`http://localhost:4000/brand/${data.brand}`),
@@ -74,18 +76,31 @@ const ItemCreate = () => {
       formData.append("stock", newItem.stock.toString());
       formData.append("picture", data.picture[0]);
 
-      await fetch("http://localhost:4000/item/create", {
+      const res = await fetch("http://localhost:4000/item/create", {
         method: "POST",
         body: formData,
       });
-      /*navigate("/");*/
+      const resData = await res.json();
+      setLoading(false);
+      navigate(`/item/${resData._id}`);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
+  const loadingElement = (
+    <div className="loading">
+      <div className="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  );
 
-  return (
-    <div className="item-create">
+  const formElement = (
+    <React.Fragment>
       <div className="form-title">Add New Item</div>
       {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
       <form onSubmit={handleSubmit(onSubmit)} className="item-create-form">
@@ -127,7 +142,11 @@ const ItemCreate = () => {
         <input {...register("picture")} type="file" accept="image/*" />
         <input type="submit" />
       </form>
-    </div>
+    </React.Fragment>
+  );
+
+  return (
+    <div className="item-create">{loading ? loadingElement : formElement}</div>
   );
 };
 

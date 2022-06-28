@@ -64,7 +64,7 @@ exports.item_create_post = async function (req, res, next) {
         img: req.body.name,
       });
       item.save();
-      res.end();
+      res.status(201).json(item);
     }
   } catch (error) {
     return next(error);
