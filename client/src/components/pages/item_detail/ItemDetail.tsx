@@ -44,6 +44,7 @@ const ItemDetail = () => {
       console.log(error);
     }
   };
+
   return (
     <div className="content-wrapper">
       <div className="item_detail">

@@ -87,6 +87,7 @@ const ItemCreate = () => {
       setLoading(false);
     }
   };
+
   const loadingElement = (
     <div className="loading">
       <div className="lds-ellipsis">

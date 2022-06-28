@@ -8,6 +8,7 @@ import {
   Brand,
   Category,
 } from "../../../types";
+import CloudinaryImg from "../../cloudinary_img/CloudinaryImg";
 
 type Inputs = {
   name: string;
@@ -16,7 +17,7 @@ type Inputs = {
   category: string;
   price: number;
   stock: number;
-  img: string;
+  picture: any;
 };
 
 const ItemEdit = () => {
@@ -38,6 +39,7 @@ const ItemEdit = () => {
   });
   const [categories, setCategories] = useState<Category[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     getItemToEdit();
@@ -92,7 +94,7 @@ const ItemEdit = () => {
     setValue("brand", item.brand._id);
     setValue("price", item.price);
     setValue("stock", item.stock);
-    setValue("img", item.img);
+    setValue("picture", item.img);
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -125,11 +127,22 @@ const ItemEdit = () => {
     }
   };
 
-  return (
-    <div className="item-edit">
+  const loadingElement = (
+    <div className="loading">
+      <div className="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  );
+
+  const formElement = (
+    <React.Fragment>
       <div className="form-title">Add New Item</div>
       {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
-      <form onSubmit={handleSubmit(onSubmit)} className="item-edit-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="item-create-form">
         {/* register your input into the hook by invoking the "register" function */}
         <label htmlFor="name">Item Name</label>
         <input {...register("name", { required: true })} />
@@ -162,12 +175,17 @@ const ItemEdit = () => {
         <label>Stock</label>
         <input {...register("stock", { required: true, min: 0 })} />
         {errors.description && <span>Stock is required</span>}
-        <label>Img(URL)</label>
-        <input {...register("img", { required: false })} />
-        {errors.description && <span>Stock is required</span>}
+        <label>Picture</label>
+        <CloudinaryImg path={item.img} size={80}></CloudinaryImg>
+        <input {...register("picture")} type="file" accept="image/*" />
+        {errors.description && <span>Picture is required</span>}
         <input type="submit" />
       </form>
-    </div>
+    </React.Fragment>
+  );
+
+  return (
+    <div className="item-edit">{loading ? loadingElement : formElement}</div>
   );
 };
 

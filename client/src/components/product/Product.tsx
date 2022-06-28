@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AdvancedImage } from "@cloudinary/react";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { fill } from "@cloudinary/url-gen/actions/resize";
 import { Product as ProductInterface } from "../../types";
 import { CgDetailsMore } from "react-icons/cg";
 import { AiFillEdit } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import "./Product.css";
+import CloudinaryImg from "../cloudinary_img/CloudinaryImg";
 
 interface ProductProps {
   product: ProductInterface;
@@ -16,15 +14,6 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({ product, handleDeleteProduct }) => {
   const { _id, name, price, stock, img } = product;
-
-  // ---- Connection to Cloudinary ----
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "dzk0haoio",
-    },
-  });
-  let image = cld.image("coffee-shop-images/" + img);
-  image.resize(fill().width(80));
 
   return (
     <div className="product">
@@ -42,17 +31,17 @@ const Product: React.FC<ProductProps> = ({ product, handleDeleteProduct }) => {
           <AiFillEdit></AiFillEdit>
           Edit
         </Link>
-        <Link
+        {/*<Link
           to={"#"}
           className="delete-btn--text"
           onClick={() => handleDeleteProduct(_id)}
         >
           <AiFillDelete></AiFillDelete>
           Delete
-        </Link>
+  </Link>*/}
       </div>
       <div className="product__img">
-        <AdvancedImage cldImg={image} />
+        <CloudinaryImg path={img} size={80}></CloudinaryImg>
       </div>
       {/*
       <div className="product__img">

@@ -1,6 +1,5 @@
 var Item = require("../models/item");
 var Brand = require("../models/brand");
-
 var async = require("async");
 
 exports.brand_list = function (req, res, next) {

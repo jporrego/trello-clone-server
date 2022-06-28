@@ -1,10 +1,18 @@
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 var cloudinary = require("cloudinary").v2;
+const fs = require("fs");
 var Item = require("../models/item");
 var Category = require("../models/category");
-
 var async = require("async");
+
+const resultHandler = (err) => {
+  if (err) {
+    console.log("unlink failed", err);
+  } else {
+    console.log("file deleted");
+  }
+};
 
 // Display inventory.
 exports.index = function (req, res, next) {
@@ -65,8 +73,10 @@ exports.item_create_post = async function (req, res, next) {
       });
       item.save();
       res.status(201).json(item);
+      fs.unlink(req.file.path, resultHandler);
     }
   } catch (error) {
+    fs.unlink(req.file.path, resultHandler);
     return next(error);
   }
 };

@@ -51,19 +51,19 @@
 .product__buttons {
     grid-area: buttons;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: center;
+    gap: 1.5rem;
     height: 100%;
-    padding: 0px .25rem;
+    padding: 0 1.5rem;
 }
 
 .product__buttons a {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     gap: .5rem;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 1);
-    width: 80%;
     border-radius: .4rem;
     font-weight: 700;
     /* text-decoration: none;
