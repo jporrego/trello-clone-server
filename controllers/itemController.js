@@ -1,3 +1,5 @@
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 var Item = require("../models/item");
 var Category = require("../models/category");
 
@@ -36,6 +38,8 @@ exports.item_detail = function (req, res, next) {
 
 exports.item_create_post = function (req, res, next) {
   try {
+    // 4000000 bytes (4 MB) max size
+    console.log(req.body, req.file.size);
     let item = new Item({
       name: req.body.name,
       description: req.body.description,
@@ -45,7 +49,7 @@ exports.item_create_post = function (req, res, next) {
       stock: req.body.stock,
       img: req.body.img,
     });
-    item.save();
+    //item.save();
     res.end();
   } catch (error) {
     return next(error);

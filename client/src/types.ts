@@ -27,4 +27,5 @@ export interface ProductPOST {
   price: number;
   stock: number;
   img: string;
+  picture?: any;
 }

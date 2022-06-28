@@ -12,6 +12,7 @@ type Inputs = {
   price: number;
   stock: number;
   img: string;
+  picture: any;
 };
 
 const ItemCreate = () => {
@@ -50,28 +51,34 @@ const ItemCreate = () => {
     try {
       // First we fetch the category and brand by id (data.category).
       // Then we add them object to the newItem object.
-
       const response = await Promise.all([
         fetch(`http://localhost:4000/category/${data.category}`),
         fetch(`http://localhost:4000/brand/${data.brand}`),
       ]);
-      console.log(response);
+
       const categoryData: Category = await response[0].json();
       const brandData: Brand = await response[1].json();
       const newItem: ProductPOST = {
         ...data,
         category: categoryData,
         brand: brandData,
+        picture: data.picture[0],
       };
+
+      const formData = new FormData();
+      formData.append("name", newItem.name);
+      formData.append("brand", newItem.brand._id);
+      formData.append("category", newItem.category._id);
+      formData.append("description", newItem.description);
+      formData.append("price", newItem.price.toString());
+      formData.append("stock", newItem.stock.toString());
+      formData.append("picture", data.picture[0]);
 
       await fetch("http://localhost:4000/item/create", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newItem),
+        body: formData,
       });
-      navigate("/");
+      /*navigate("/");*/
     } catch (error) {
       console.log(error);
     }
@@ -117,6 +124,7 @@ const ItemCreate = () => {
         <label>Img(URL)</label>
         <input {...register("img", { required: false })} />
         {errors.description && <span>Stock is required</span>}
+        <input {...register("picture")} type="file" accept="image/*" />
         <input type="submit" />
       </form>
     </div>
