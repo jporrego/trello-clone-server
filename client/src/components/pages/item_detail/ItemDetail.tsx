@@ -45,32 +45,34 @@ const ItemDetail = () => {
     }
   };
   return (
-    <div className="item_detail">
-      {product && (
-        <React.Fragment>
-          <div className="item_detail__name">{product.name}</div>
-          <div className="item_detail__category">
-            <div>{product.category.name}</div>
-          </div>
-          <div className="item_detail__category">
-            <div>{product.brand.name}</div>
-          </div>
-          <div className="item_detail__description">{product.description}</div>
-          <div className="item_detail__info">
-            <div className="item_detail__price">${product.price}.00</div>
-            <div className="item_detail__stock">{product.stock} units</div>
-            <Link className="btn btn-link" to={`/item/edit/${product._id}`}>
-              Edit Item
-            </Link>
-            <div className="delete-btn--text" onClick={onDelete}>
-              Delete
+    <div className="content-wrapper">
+      <div className="item_detail">
+        {product && (
+          <React.Fragment>
+            <div className="item_detail__name">{product.name}</div>
+            <div className="item_detail__category_brand">
+              <div>{product.brand.name}</div>
+              <div>{product.category.name}</div>
             </div>
-          </div>
-          <div className="item_detail__img">
-            <AdvancedImage cldImg={image} />
-          </div>
-        </React.Fragment>
-      )}
+            <div className="item_detail__description">
+              {product.description}
+            </div>
+            <div className="item_detail__info">
+              <div className="item_detail__price">${product.price}.00</div>
+              <div className="item_detail__stock">{product.stock} units</div>
+              <Link className="btn btn-link" to={`/item/edit/${product._id}`}>
+                Edit Item
+              </Link>
+              <div className="delete-btn--text" onClick={onDelete}>
+                Delete
+              </div>
+            </div>
+            <div className="item_detail__img">
+              <AdvancedImage cldImg={image} />
+            </div>
+          </React.Fragment>
+        )}
+      </div>
     </div>
   );
 };

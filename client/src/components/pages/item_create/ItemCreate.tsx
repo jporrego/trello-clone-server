@@ -11,7 +11,6 @@ type Inputs = {
   category: string;
   price: number;
   stock: number;
-  img: string;
   picture: any;
 };
 
@@ -136,10 +135,9 @@ const ItemCreate = () => {
         <label>Stock</label>
         <input {...register("stock", { required: true, min: 0 })} />
         {errors.description && <span>Stock is required</span>}
-        <label>Img(URL)</label>
-        <input {...register("img", { required: false })} />
-        {errors.description && <span>Stock is required</span>}
+        <label>Picture</label>
         <input {...register("picture")} type="file" accept="image/*" />
+        {errors.description && <span>Picture is required</span>}
         <input type="submit" />
       </form>
     </React.Fragment>

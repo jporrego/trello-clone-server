@@ -4,8 +4,8 @@
     grid-template-rows: repeat(max-content);
     grid-template-areas:
         "name img"
-        "description img"
         "category img"
+        "description img"
         "info img";
     gap: 2rem;
     max-width: 80rem;
@@ -17,7 +17,24 @@
     font-weight: 700;
 }
 
-.item_detail__category div {
+.item_detail__category_brand {
+    display: flex;
+    gap: 1rem;
+}
+
+.item_detail__category_brand div {
+    background-color: var(--grey);
+    width: fit-content;
+    padding: .25rem .75rem;
+    height: fit-content;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: .3rem;
+}
+
+.item_detail__brand div {
+    grid-area: brand;
     background-color: var(--grey);
     width: fit-content;
     padding: .25rem .75rem;
