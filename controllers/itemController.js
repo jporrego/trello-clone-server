@@ -1,5 +1,6 @@
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
+var cloudinary = require("cloudinary").v2;
 var Item = require("../models/item");
 var Category = require("../models/category");
 
@@ -36,21 +37,35 @@ exports.item_detail = function (req, res, next) {
     });
 };
 
-exports.item_create_post = function (req, res, next) {
+exports.item_create_post = async function (req, res, next) {
   try {
     // 4000000 bytes (4 MB) max size
-    console.log(req.body, req.file.size);
-    let item = new Item({
-      name: req.body.name,
-      description: req.body.description,
-      brand: req.body.brand,
-      category: req.body.category,
-      price: req.body.price,
-      stock: req.body.stock,
-      img: req.body.img,
-    });
-    //item.save();
-    res.end();
+    //console.log(req.body, req.file);
+    if (req.file.size > 6000000) {
+      res.status(413).json({
+        message: "Image too big. Max size 4MB.",
+      });
+    } else {
+      await cloudinary.uploader.upload(
+        req.file.path,
+        { public_id: req.body.name, folder: "coffee-shop-images" },
+        function (error, result) {
+          console.log(result, error);
+        }
+      );
+      console.log("here");
+      let item = new Item({
+        name: req.body.name,
+        description: req.body.description,
+        brand: req.body.brand,
+        category: req.body.category,
+        price: req.body.price,
+        stock: req.body.stock,
+        img: req.body.name,
+      });
+      item.save();
+      res.end();
+    }
   } catch (error) {
     return next(error);
   }

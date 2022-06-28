@@ -22,7 +22,7 @@ const ItemDetail = () => {
     },
   });
   let image = cld.image(product && "coffee-shop-images/" + product.img);
-  image.resize(fill().width(150));
+  image.resize(fill().width(400));
 
   const getItem = async () => {
     try {
