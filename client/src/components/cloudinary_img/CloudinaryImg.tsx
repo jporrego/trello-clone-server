@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { fill } from "@cloudinary/url-gen/actions/resize";
@@ -15,9 +15,16 @@ const CloudinaryImg: React.FC<Props> = ({ path, size }) => {
       cloudName: "dzk0haoio",
     },
   });
-  let image = cld.image("coffee-shop-images/" + path);
-  image.resize(fill().width(size));
-  return <AdvancedImage cldImg={image} />;
+
+  const getImage = () => {
+    if (path !== "") {
+      let cloudinaryImg = cld.image("coffee-shop-images/" + path);
+      cloudinaryImg.resize(fill().width(size));
+      return <AdvancedImage cldImg={cloudinaryImg} />;
+    }
+  };
+
+  return <React.Fragment>{getImage()}</React.Fragment>;
 };
 
 export default CloudinaryImg;

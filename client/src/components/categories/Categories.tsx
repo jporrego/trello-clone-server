@@ -3,13 +3,20 @@ import { Link } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import { Category } from "../../types";
 import "./Categories.css";
+import ErrorMessage from "../error_message/ErrorMessage";
 
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getCategories();
   }, []);
+
+  const showErrorMessage = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => setErrorMessage(""), 2000);
+  };
 
   const getCategories = async () => {
     try {
@@ -35,11 +42,11 @@ const Categories = () => {
 
       if (res.status !== 200) {
         const data = await res.json();
-        data.message && console.log(data.message);
+        data.message && showErrorMessage(data.message);
       }
       getCategories();
     } catch (error) {
-      console.log(error);
+      console.log(typeof error);
     }
   };
 
@@ -59,6 +66,7 @@ const Categories = () => {
           </div>
         ))}
       </div>
+      {errorMessage && <div className="error">{errorMessage}</div>}
     </div>
   );
 };

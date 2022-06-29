@@ -6,10 +6,16 @@ import "./Brands.css";
 
 const Brands = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getBrands();
   }, []);
+
+  const showErrorMessage = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => setErrorMessage(""), 2000);
+  };
 
   const getBrands = async () => {
     try {
@@ -29,7 +35,7 @@ const Brands = () => {
 
       if (res.status !== 200) {
         const data = await res.json();
-        data.message && console.log(data.message);
+        data.message && showErrorMessage(data.message);
       }
 
       getBrands();
@@ -54,6 +60,7 @@ const Brands = () => {
           </div>
         ))}
       </div>
+      {errorMessage && <div className="error">{errorMessage}</div>}
     </div>
   );
 };

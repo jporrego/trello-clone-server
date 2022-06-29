@@ -40,6 +40,7 @@ const ItemEdit = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [newPicture, setNewPicture] = useState<boolean>(false);
 
   useEffect(() => {
     getItemToEdit();
@@ -60,6 +61,8 @@ const ItemEdit = () => {
     setValue,
     formState: { errors },
   } = useForm<Inputs>();
+  const watchPic = watch("picture");
+  console.log(watchPic);
 
   const getCategoriesAndBrands = async () => {
     try {
@@ -94,25 +97,38 @@ const ItemEdit = () => {
     setValue("brand", item.brand._id);
     setValue("price", item.price);
     setValue("stock", item.stock);
-    setValue("picture", item.img);
+    //setValue("picture", item.img);
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       // First we fetch the category and brand by id (data.category).
       // Then we add them object to the newItem object.
-
+      console.log(data);
       const response = await Promise.all([
         fetch(`http://localhost:4000/category/${data.category}`),
         fetch(`http://localhost:4000/brand/${data.brand}`),
       ]);
       const categoryData: Category = await response[0].json();
       const brandData: Brand = await response[1].json();
-      const newItem: ProductPOST = {
+      let newItem: ProductPOST = {
         ...data,
         category: categoryData,
         brand: brandData,
       };
+
+      if (false) {
+        newItem = {
+          ...newItem,
+          picture: data.picture[0],
+        };
+      } else {
+        newItem = {
+          ...newItem,
+          picture: item.img,
+        };
+      }
+      console.log(newItem);
 
       await fetch(`http://localhost:4000/item/${params.id}/update`, {
         method: "POST",
@@ -147,6 +163,7 @@ const ItemEdit = () => {
         <label htmlFor="name">Item Name</label>
         <input {...register("name", { required: true })} />
         {errors.name && <span>Name is required</span>}
+
         <label htmlFor="brand">Brand</label>
         <select {...register("brand", { required: true })}>
           {brands.map((brand) => (
@@ -156,6 +173,7 @@ const ItemEdit = () => {
           ))}
         </select>
         {errors.brand && <span>Brand is required</span>}
+
         <label>Category</label>
         <select {...register("category", { required: true })}>
           {categories.map((category) => (
@@ -165,25 +183,38 @@ const ItemEdit = () => {
           ))}
         </select>
         {errors.category && <span>Category is required</span>}
-        {/* include validation with required or other standard HTML validation rules */}
+
         <label>Description</label>
         <textarea {...register("description", { required: true })} />
         {errors.description && <span>Name is required</span>}
+
         <label>Price</label>
         <input {...register("price", { required: true, min: 0 })} />
         {errors.description && <span>Price is required</span>}
+
         <label>Stock</label>
         <input {...register("stock", { required: true, min: 0 })} />
         {errors.description && <span>Stock is required</span>}
+
         <label>Picture</label>
-        <CloudinaryImg path={item.img} size={80}></CloudinaryImg>
-        <input {...register("picture")} type="file" accept="image/*" />
+        {!newPicture && (
+          <CloudinaryImg path={item.img} size={80}></CloudinaryImg>
+        )}
+        <div>New Picture</div>
+        <input
+          {...register("picture", { required: true })}
+          type="file"
+          accept="image/*"
+          onClick={() => setNewPicture(true)}
+        />
         {errors.description && <span>Picture is required</span>}
+
         <input type="submit" />
       </form>
     </React.Fragment>
   );
 
+  console.log();
   return (
     <div className="item-edit">{loading ? loadingElement : formElement}</div>
   );

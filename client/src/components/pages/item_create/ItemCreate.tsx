@@ -51,6 +51,7 @@ const ItemCreate = () => {
     try {
       // First we fetch the category and brand by id (data.category).
       // Then we add them object to the newItem object.
+      console.log(data);
       setLoading(true);
       const response = await Promise.all([
         fetch(`http://localhost:4000/category/${data.category}`),
@@ -126,19 +127,28 @@ const ItemCreate = () => {
           ))}
         </select>
         {errors.category && <span>Category is required</span>}
+
         {/* include validation with required or other standard HTML validation rules */}
         <label>Description</label>
         <textarea {...register("description", { required: true })} />
         {errors.description && <span>Name is required</span>}
+
         <label>Price</label>
         <input {...register("price", { required: true, min: 0 })} />
         {errors.description && <span>Price is required</span>}
+
         <label>Stock</label>
         <input {...register("stock", { required: true, min: 0 })} />
         {errors.description && <span>Stock is required</span>}
+
         <label>Picture</label>
-        <input {...register("picture")} type="file" accept="image/*" />
+        <input
+          {...register("picture", { required: true })}
+          type="file"
+          accept="image/*"
+        />
         {errors.description && <span>Picture is required</span>}
+
         <input type="submit" />
       </form>
     </React.Fragment>
