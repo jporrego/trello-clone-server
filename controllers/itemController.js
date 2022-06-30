@@ -95,7 +95,7 @@ exports.item_update_post = async function (req, res, next) {
       img: req.body.picture,
     };
     await Item.findOneAndUpdate({ _id: req.params.id }, updatedItem);
-    res.end();
+    res.sendStatus(200);
   } catch (error) {
     return next(error);
   }
@@ -103,10 +103,9 @@ exports.item_update_post = async function (req, res, next) {
 
 exports.item_update_new_img_post = async function (req, res, next) {
   try {
-    console.log(req.file);
     if (req.file.size > 6000000) {
       res.status(413).json({
-        message: "Image too big. Max size 4MB.",
+        message: "The image is too big. Max size 6MB.",
       });
       fs.unlink(req.file.path, resultHandler);
     } else {
@@ -128,20 +127,8 @@ exports.item_update_new_img_post = async function (req, res, next) {
       };
       await Item.findOneAndUpdate({ _id: req.params.id }, updatedItem);
       fs.unlink(req.file.path, resultHandler);
-      res.end();
+      res.sendStatus(200);
     }
-    /*
-    let updatedItem = {
-      name: req.body.name,
-      description: req.body.description,
-      brand: req.body.brand,
-      category: req.body.category,
-      price: req.body.price,
-      stock: req.body.stock,
-      img: req.body.img,
-    };*/
-    //await Item.findOneAndUpdate({ _id: req.params.id }, updatedItem);
-    //res.end();
   } catch (error) {
     return next(error);
   }

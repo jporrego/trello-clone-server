@@ -41,6 +41,7 @@ const ItemEdit = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [newPicture, setNewPicture] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getItemToEdit();
@@ -61,6 +62,11 @@ const ItemEdit = () => {
     setValue,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const showErrorMessage = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => setErrorMessage(""), 4000);
+  };
 
   const getCategoriesAndBrands = async () => {
     try {
@@ -97,10 +103,12 @@ const ItemEdit = () => {
     setValue("stock", item.stock);
     //setValue("picture", item.img);
   };
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       // First we fetch the category and brand by id (data.category).
       // Then we add them object to the newItem object.
+      setLoading(true);
       const response = await Promise.all([
         fetch(`http://localhost:4000/category/${data.category}`),
         fetch(`http://localhost:4000/brand/${data.brand}`),
@@ -124,17 +132,25 @@ const ItemEdit = () => {
         formData.append("price", newItem.price.toString());
         formData.append("stock", newItem.stock.toString());
         formData.append("picture", data.picture[0]);
-        await fetch(
+        const res = await fetch(
           `http://localhost:4000/item/${params.id}/update-new-image`,
           {
             method: "POST",
             body: formData,
           }
         );
-        navigate(`/item/${params.id}`);
+
+        setLoading(false);
+        console.log(res.status);
+        if (res.status !== 200) {
+          const resData = await res.json();
+          resData.message && showErrorMessage(resData.message);
+          return;
+        } else {
+          navigate(`/item/${params.id}`);
+        }
       } else {
         newItem = { ...newItem, picture: item.img };
-        console.log(newItem);
         await fetch(`http://localhost:4000/item/${params.id}/update`, {
           method: "POST",
           headers: {
@@ -142,10 +158,19 @@ const ItemEdit = () => {
           },
           body: JSON.stringify(newItem),
         });
+        setLoading(false);
         navigate(`/item/${params.id}`);
       }
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      let message;
+      if (error instanceof Error) {
+        message = error.message;
+      } else {
+        message = String(error);
+      }
+
+      showErrorMessage(message);
     }
   };
 
@@ -214,6 +239,10 @@ const ItemEdit = () => {
           onClick={() => setNewPicture(true)}
         />
         {errors.description && <span>Picture is required</span>}
+
+        {errorMessage && (
+          <div className="item-create-error">{errorMessage}</div>
+        )}
 
         <input type="submit" />
       </form>

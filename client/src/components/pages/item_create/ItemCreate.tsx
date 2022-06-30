@@ -57,7 +57,6 @@ const ItemCreate = () => {
     try {
       // First we fetch the category and brand by id (data.category).
       // Then we add them object to the newItem object.
-      console.log(data);
       setLoading(true);
       const response = await Promise.all([
         fetch(`http://localhost:4000/category/${data.category}`),
@@ -97,8 +96,15 @@ const ItemCreate = () => {
         navigate(`/item/${resData._id}`);
       }
     } catch (error) {
-      console.log(error);
       setLoading(false);
+      let message;
+      if (error instanceof Error) {
+        message = error.message;
+      } else {
+        message = String(error);
+      }
+
+      showErrorMessage(message);
     }
   };
 
