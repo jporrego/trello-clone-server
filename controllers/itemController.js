@@ -53,6 +53,7 @@ exports.item_create_post = async function (req, res, next) {
       res.status(413).json({
         message: "Image too big. Max size 4MB.",
       });
+      fs.unlink(req.file.path, resultHandler);
     } else {
       await cloudinary.uploader.upload(
         req.file.path,
@@ -61,7 +62,6 @@ exports.item_create_post = async function (req, res, next) {
           console.log(result, error);
         }
       );
-      console.log("here");
       let item = new Item({
         name: req.body.name,
         description: req.body.description,
@@ -82,19 +82,66 @@ exports.item_create_post = async function (req, res, next) {
 };
 
 exports.item_update_post = async function (req, res, next) {
-  let updatedItem = {
-    name: req.body.name,
-    description: req.body.description,
-    brand: req.body.brand,
-    category: req.body.category,
-    price: req.body.price,
-    stock: req.body.stock,
-    img: req.body.img,
-  };
-  console.log(updatedItem);
   try {
+    console.log(req.body);
+
+    let updatedItem = {
+      name: req.body.name,
+      description: req.body.description,
+      brand: req.body.brand,
+      category: req.body.category,
+      price: req.body.price,
+      stock: req.body.stock,
+      img: req.body.picture,
+    };
     await Item.findOneAndUpdate({ _id: req.params.id }, updatedItem);
     res.end();
+  } catch (error) {
+    return next(error);
+  }
+};
+
+exports.item_update_new_img_post = async function (req, res, next) {
+  try {
+    console.log(req.file);
+    if (req.file.size > 6000000) {
+      res.status(413).json({
+        message: "Image too big. Max size 4MB.",
+      });
+      fs.unlink(req.file.path, resultHandler);
+    } else {
+      await cloudinary.uploader.upload(
+        req.file.path,
+        { public_id: req.body.name, folder: "coffee-shop-images" },
+        function (error, result) {
+          console.log(result, error);
+        }
+      );
+      let updatedItem = {
+        name: req.body.name,
+        description: req.body.description,
+        brand: req.body.brand,
+        category: req.body.category,
+        price: req.body.price,
+        stock: req.body.stock,
+        img: req.body.name,
+      };
+      await Item.findOneAndUpdate({ _id: req.params.id }, updatedItem);
+      fs.unlink(req.file.path, resultHandler);
+      res.end();
+    }
+    /*
+    let updatedItem = {
+      name: req.body.name,
+      description: req.body.description,
+      brand: req.body.brand,
+      category: req.body.category,
+      price: req.body.price,
+      stock: req.body.stock,
+      img: req.body.img,
+    };*/
+    //await Item.findOneAndUpdate({ _id: req.params.id }, updatedItem);
+    //res.end();
   } catch (error) {
     return next(error);
   }

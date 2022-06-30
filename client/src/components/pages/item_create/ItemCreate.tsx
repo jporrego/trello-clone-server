@@ -18,6 +18,7 @@ const ItemCreate = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getCategoriesAndBrands();
@@ -31,6 +32,11 @@ const ItemCreate = () => {
   } = useForm<Inputs>();
 
   const navigate = useNavigate();
+
+  const showErrorMessage = (message: string) => {
+    setErrorMessage(message);
+    setTimeout(() => setErrorMessage(""), 4000);
+  };
 
   const getCategoriesAndBrands = async () => {
     try {
@@ -80,9 +86,16 @@ const ItemCreate = () => {
         method: "POST",
         body: formData,
       });
-      const resData = await res.json();
+
       setLoading(false);
-      navigate(`/item/${resData._id}`);
+
+      const resData = await res.json();
+      if (res.status !== 201) {
+        resData.message && showErrorMessage(resData.message);
+        return;
+      } else {
+        navigate(`/item/${resData._id}`);
+      }
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -147,6 +160,9 @@ const ItemCreate = () => {
           type="file"
           accept="image/*"
         />
+        {errorMessage && (
+          <div className="item-create-error">{errorMessage}</div>
+        )}
         {errors.description && <span>Picture is required</span>}
 
         <input type="submit" />

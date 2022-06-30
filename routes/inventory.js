@@ -20,8 +20,15 @@ router.post(
   item_controller.item_create_post
 );
 
-// POST request to update item.
+// POST request to update item with same image.
 router.post("/item/:id/update", item_controller.item_update_post);
+
+// POST request to update item with new image.
+router.post(
+  "/item/:id/update-new-image",
+  upload.single("picture"),
+  item_controller.item_update_new_img_post
+);
 
 // POST request to delete item.
 router.delete("/item/:id/delete", item_controller.item_delete_post);

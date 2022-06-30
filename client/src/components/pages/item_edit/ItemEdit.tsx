@@ -61,8 +61,6 @@ const ItemEdit = () => {
     setValue,
     formState: { errors },
   } = useForm<Inputs>();
-  const watchPic = watch("picture");
-  console.log(watchPic);
 
   const getCategoriesAndBrands = async () => {
     try {
@@ -99,12 +97,10 @@ const ItemEdit = () => {
     setValue("stock", item.stock);
     //setValue("picture", item.img);
   };
-
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       // First we fetch the category and brand by id (data.category).
       // Then we add them object to the newItem object.
-      console.log(data);
       const response = await Promise.all([
         fetch(`http://localhost:4000/category/${data.category}`),
         fetch(`http://localhost:4000/brand/${data.brand}`),
@@ -117,27 +113,37 @@ const ItemEdit = () => {
         brand: brandData,
       };
 
-      if (false) {
-        newItem = {
-          ...newItem,
-          picture: data.picture[0],
-        };
+      // Two ways of dealing with the picture.
+      // If there's a new one, upload the file. Otherwise just keep the path string.
+      if (newPicture) {
+        const formData = new FormData();
+        formData.append("name", newItem.name);
+        formData.append("brand", newItem.brand._id);
+        formData.append("category", newItem.category._id);
+        formData.append("description", newItem.description);
+        formData.append("price", newItem.price.toString());
+        formData.append("stock", newItem.stock.toString());
+        formData.append("picture", data.picture[0]);
+        await fetch(
+          `http://localhost:4000/item/${params.id}/update-new-image`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        navigate(`/item/${params.id}`);
       } else {
-        newItem = {
-          ...newItem,
-          picture: item.img,
-        };
+        newItem = { ...newItem, picture: item.img };
+        console.log(newItem);
+        await fetch(`http://localhost:4000/item/${params.id}/update`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newItem),
+        });
+        navigate(`/item/${params.id}`);
       }
-      console.log(newItem);
-
-      await fetch(`http://localhost:4000/item/${params.id}/update`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newItem),
-      });
-      navigate(`/item/${params.id}`);
     } catch (error) {
       console.log(error);
     }
@@ -156,7 +162,7 @@ const ItemEdit = () => {
 
   const formElement = (
     <React.Fragment>
-      <div className="form-title">Add New Item</div>
+      <div className="form-title">Edit Item</div>
       {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
       <form onSubmit={handleSubmit(onSubmit)} className="item-create-form">
         {/* register your input into the hook by invoking the "register" function */}
@@ -202,7 +208,7 @@ const ItemEdit = () => {
         )}
         <div>New Picture</div>
         <input
-          {...register("picture", { required: true })}
+          {...register("picture", { required: false })}
           type="file"
           accept="image/*"
           onClick={() => setNewPicture(true)}
