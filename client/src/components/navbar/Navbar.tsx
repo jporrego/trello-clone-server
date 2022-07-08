@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Links from "../links/Links";
+import Links from "../Links/Links";
 import Logo from "../logo/Logo";
 import NavButtons from "../nav-buttons/NavButtons";
 import UserPreview from "../user_preview/UserPreview";
