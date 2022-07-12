@@ -6,14 +6,18 @@ It consists of two **React** sites (a simple **Shop** for clients and an **Admin
 
 ## Shop
 
-_React - Typescript_
+### A simple online store. Browse and filter products and add them to a shopping cart.
+
+_React - Typescript - Original Design with Vanilla CSS_
 
 - [Live Site](https://jporrego.github.io/coffee-shop/)
 - [Repo](https://github.com/jporrego/coffee-shop)
 
 ## Admin Dashboard
 
-_React - Typescript_
+### Website for managing the store's inventory and performing CRUD operations.
+
+_React - Typescript - Original Design with Vanilla CSS_
 
 - [Live Site](https://coffee-shop-admin-dashboard.netlify.app/)
 - [Repo](https://github.com/jporrego/coffee-shop-admin-dashboard)
