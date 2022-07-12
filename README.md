@@ -1,7 +1,5 @@
 # CaféShop - _Full Stack E-commerce Portfolio Project_
 
-It consists of two **React** sites (a simple **Shop** for clients and an **Admin Dashboard** for managing the inventory and doing CRUD operations) and a **Node Backend**.
-
 ![alt-text](https://github.com/jporrego/coffee-shop/blob/main/src/assets/giflight.gif)
 
 ## Shop
