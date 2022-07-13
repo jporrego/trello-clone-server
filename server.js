@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config({ path: "./.env" });
 var fs = require("fs");
 var cloudinary = require("cloudinary").v2;
+require("child_process").fork("populatedb.js");
 
 const port = process.env.PORT || 4000;
 var indexRouter = require("./routes/index");
