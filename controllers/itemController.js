@@ -55,9 +55,10 @@ exports.item_create_post = async function (req, res, next) {
       });
       fs.unlink(req.file.path, resultHandler);
     } else {
+      const imageName = req.body.name.replace(/\s/g, "");
       await cloudinary.uploader.upload(
         req.file.path,
-        { public_id: req.body.name, folder: "coffee-shop-images" },
+        { public_id: imageName, folder: "coffee-shop-images" },
         function (error, result) {
           console.log(result, error);
         }
@@ -69,7 +70,7 @@ exports.item_create_post = async function (req, res, next) {
         category: req.body.category,
         price: req.body.price,
         stock: req.body.stock,
-        img: req.body.name,
+        img: imageName,
       });
       item.save();
       res.status(201).json(item);
