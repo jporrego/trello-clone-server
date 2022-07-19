@@ -46,6 +46,12 @@ exports.item_detail = function (req, res, next) {
 };
 
 exports.item_create_post = async function (req, res, next) {
+  if (req.body.name.trim().length === 0) {
+    res.status(413).json({
+      message: "Name is required",
+    });
+    return;
+  }
   try {
     // 4000000 bytes (4 MB) max size
     //console.log(req.body, req.file);
@@ -103,6 +109,12 @@ exports.item_update_post = async function (req, res, next) {
 };
 
 exports.item_update_new_img_post = async function (req, res, next) {
+  if (req.body.name.trim().length === 0) {
+    res.status(413).json({
+      message: "Name is required",
+    });
+    return;
+  }
   try {
     if (req.file.size > 6000000) {
       res.status(413).json({
