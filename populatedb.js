@@ -300,7 +300,8 @@ async.series(
     if (err) {
       console.log("FINAL ERR: " + err);
     } else {
-      console.log("ITEMS: " + items);
+      //console.log("ITEMS: " + items);
+      console.log("Database populated");
     }
     // All done, disconnect from database
     mongoose.connection.close();
