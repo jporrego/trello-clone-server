@@ -61,3 +61,8 @@ INSERT INTO list (board_id, name) VALUES ('2', 'List 1');
 INSERT INTO list (board_id, name) VALUES ('2', 'List 2');
 INSERT INTO list (board_id, name) VALUES ('3', 'List 1');
 INSERT INTO list (board_id, name) VALUES ('3', 'List 2');
+
+INSERT INTO card (list_id, name, description) VALUES ('2', 'Card 1', 'Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('2', 'Card 2','Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('3', 'Card 1','Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('3', 'Card 2','Tesing card functionality');
