@@ -5,10 +5,6 @@ const db = require("../db");
 // Respond with single user.
 exports.boards = async (req, res, next) => {
   const { rows } = await db.query("SELECT * FROM board");
-  res.status(200).json({
-    status: "success",
-    data: {
-      user: rows,
-    },
-  });
+  console.log(rows);
+  res.status(200).json(rows);
 };
