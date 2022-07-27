@@ -23,7 +23,6 @@ exports.board_lists = async (req, res, next) => {
 
   try {
     const { boardId } = req.params;
-
     const listsAndCards = {
       lists: [],
       cards: [],
@@ -32,7 +31,6 @@ exports.board_lists = async (req, res, next) => {
     const { rows } = await db.query("SELECT * FROM list WHERE board_id = $1", [
       boardId,
     ]);
-
     listsAndCards.lists = rows;
 
     for (const list of rows) {
@@ -46,8 +44,9 @@ exports.board_lists = async (req, res, next) => {
         }
       }
     }
+
     console.log(listsAndCards);
-    res.status(200).json(rows);
+    res.status(200).json(listsAndCards);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Server error" });

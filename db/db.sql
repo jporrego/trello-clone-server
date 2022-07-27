@@ -66,3 +66,11 @@ INSERT INTO card (list_id, name, description) VALUES ('2', 'Card 1', 'Tesing car
 INSERT INTO card (list_id, name, description) VALUES ('2', 'Card 2','Tesing card functionality');
 INSERT INTO card (list_id, name, description) VALUES ('3', 'Card 1','Tesing card functionality');
 INSERT INTO card (list_id, name, description) VALUES ('3', 'Card 2','Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('4', 'Card 1', 'Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('4', 'Card 2','Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('5', 'Card 1','Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('5', 'Card 2','Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('6', 'Card 1', 'Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('6', 'Card 2','Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('7', 'Card 1','Tesing card functionality');
+INSERT INTO card (list_id, name, description) VALUES ('7', 'Card 2','Tesing card functionality');
