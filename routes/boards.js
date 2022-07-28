@@ -1,7 +1,7 @@
-let express = require("express");
-let router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-let boards_controller = require("../controllers/boardsController");
+const boards_controller = require("../controllers/boardsController");
 
 // GET All boards.
 router.get("/", boards_controller.boards);

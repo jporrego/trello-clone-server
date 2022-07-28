@@ -45,7 +45,6 @@ exports.board_lists = async (req, res, next) => {
       }
     }
 
-    console.log(listsAndCards);
     res.status(200).json(listsAndCards);
   } catch (err) {
     console.log(err);
