@@ -1,7 +1,5 @@
 const db = require("../db");
 
-/// USER ROUTES ///
-
 // Respond with single user.
 exports.boards = async (req, res, next) => {
   const { rows } = await db.query("SELECT * FROM board");
@@ -18,6 +16,19 @@ exports.board_detail = async (req, res, next) => {
 };
 
 exports.board_lists = async (req, res, next) => {
+  try {
+    const { boardId } = req.params;
+    const { rows } = await db.query("SELECT * FROM list WHERE board_id = $1", [
+      boardId,
+    ]);
+    console.log(rows);
+    res.status(200).json(rows);
+  } catch (error) {
+    res.send(500);
+  }
+};
+
+exports.OUTDATED_board_lists_and_cards = async (req, res, next) => {
   /// Taking the boardId, get all the lists. Then for each list get its cards.
   // This is done this way to get all the info in one request.
 
