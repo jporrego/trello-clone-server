@@ -22,3 +22,14 @@ exports.add_card = async (req, res, next) => {
     res.send(500);
   }
 };
+
+exports.delete_card = async (req, res, next) => {
+  try {
+    const { cardId } = req.params;
+    console.log(cardId);
+    await db.query("DELETE FROM card WHERE id = $1", [cardId]);
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+};
