@@ -12,4 +12,7 @@ router.get("/:listId/cards", lists_controller.list_cards);
 // GET All lists.
 router.get("/", lists_controller.lists);
 
+// PUT update card order.
+router.put("/:listId/cards/order", lists_controller.list_cards_order);
+
 module.exports = router;
