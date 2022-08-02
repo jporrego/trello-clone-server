@@ -40,6 +40,9 @@ exports.add_list = async (req, res, next) => {
       board_id,
       listName,
     ]);
+    await db.query(
+      "INSERT INTO list_cards_order (list_id) SELECT currval('list_id_seq')"
+    );
     /*
     const queryNewId = await db.query("SELECT currval('card_id_seq')");
     const newCardId = queryNewId.rows[0].currval;
@@ -50,7 +53,6 @@ exports.add_list = async (req, res, next) => {
     const newCard = queryNewCard.rows;
 
     console.log(newCard);*/
-    console.log(1);
     res.sendStatus(200);
   } catch (error) {
     res.send(500);
