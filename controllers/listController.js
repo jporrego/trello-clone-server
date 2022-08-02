@@ -13,9 +13,8 @@ exports.list_cards = async (req, res, next) => {
     const { rows } = await db.query("SELECT * FROM card WHERE list_id = $1", [
       listId,
     ]);
-
     // Get card order and add new card id to it.
-
+    /*
     let cardsOrder = await db.query(
       "SELECT cards_order FROM list WHERE id = $1",
       [listId]
@@ -23,8 +22,8 @@ exports.list_cards = async (req, res, next) => {
     cardsOrder = cardsOrder.rows[0].cards_order;
     const cardsById = cardsOrder.map((id) => rows.find((c) => c.id === id));
     console.log(cardsOrder, cardsById);
-
-    res.status(200).json(cardsById);
+      */
+    res.status(200).json(rows);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

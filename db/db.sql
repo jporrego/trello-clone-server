@@ -24,6 +24,14 @@ CREATE TABLE list
   CONSTRAINT "fk_board" FOREIGN KEY (board_id) REFERENCES board (id)
 );
 
+CREATE TABLE list_cards_order  
+(
+  "id" SERIAL PRIMARY KEY,
+  "list_id" INT NOT NULL,
+  "cards_order" INT[],
+  CONSTRAINT "fk_list" FOREIGN KEY (list_id) REFERENCES list (id)
+);
+
 CREATE TABLE card 
 (
   "id" SERIAL PRIMARY KEY,
