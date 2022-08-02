@@ -43,24 +43,27 @@ exports.delete_card = async (req, res, next) => {
   try {
     const { cardId } = req.params;
 
-    // Get list id
+    // Get list id, use it to get card order,
+    // remove the cardId from the card order and then delete the card.
+
     let listId = await db.query("SELECT list_id FROM card WHERE id = $1", [
       cardId,
     ]);
     listId = listId.rows[0].list_id;
 
-    // Get card order
     let cardsOrder = await db.query(
       "SELECT cards_order FROM list_cards_order WHERE list_id = $1",
       [listId]
     );
     cardsOrder = cardsOrder.rows[0].cards_order;
     cardsOrder = cardsOrder.filter((id) => id !== parseInt(cardId));
+
     await db.query(
       "UPDATE list_cards_order SET cards_order = $1 WHERE list_id = $2",
       [cardsOrder, listId]
     );
     await db.query("DELETE FROM card WHERE id = $1", [cardId]);
+
     res.sendStatus(200);
   } catch (error) {
     console.log(error);
