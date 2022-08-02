@@ -18,10 +18,14 @@ exports.list_cards = async (req, res, next) => {
       "SELECT cards_order FROM list_cards_order WHERE list_id = $1",
       [listId]
     );
+
     cardsOrder = cardsOrder.rows[0].cards_order;
-    const cardsById = cardsOrder.map((id) => rows.find((c) => c.id === id));
-    console.log(cardsById);
-    res.status(200).json(cardsById);
+    if (cardsOrder) {
+      const cardsById = cardsOrder.map((id) => rows.find((c) => c.id === id));
+      res.status(200).json(cardsById);
+    } else {
+      res.status(200).json(rows);
+    }
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
