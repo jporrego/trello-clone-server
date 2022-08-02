@@ -7,26 +7,34 @@ exports.add_card = async (req, res, next) => {
       "INSERT INTO card (list_id, name, description) VALUES ($1, $2, $3)",
       [list_id, cardName, cardDescription]
     );
-    console.log(cardName);
+
     const queryNewId = await db.query("SELECT currval('card_id_seq')");
     const newCardId = queryNewId.rows[0].currval;
 
-    const queryNewCard = await db.query("SELECT * FROM card WHERE id = $1", [
-      newCardId,
-    ]);
-    const newCard = queryNewCard.rows;
+    // Get card order and add new card id to it.
 
-    console.log(newCard);
-    res.status(200).json(newCard);
+    let cardOrder = await db.query(
+      "SELECT cards_order FROM list WHERE id = $1",
+      [list_id]
+    );
+
+    cardOrder = cardOrder.rows[0].cards_order;
+    cardOrder.push(newCardId);
+    await db.query("UPDATE list SET cards_order = $1 WHERE id = $2", [
+      cardOrder,
+      list_id,
+    ]);
+
+    res.sendStatus(200);
   } catch (error) {
-    res.send(500);
+    console.log(error);
+    res.sendStatus(500);
   }
 };
 
 exports.delete_card = async (req, res, next) => {
   try {
     const { cardId } = req.params;
-    console.log(cardId);
     await db.query("DELETE FROM card WHERE id = $1", [cardId]);
     res.sendStatus(200);
   } catch (error) {

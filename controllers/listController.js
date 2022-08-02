@@ -3,7 +3,6 @@ const db = require("../db");
 // Respond with single user.
 exports.lists = async (req, res, next) => {
   const { rows } = await db.query("SELECT * FROM list");
-  console.log(rows);
   res.status(200).json(rows);
 };
 
@@ -14,6 +13,7 @@ exports.list_cards = async (req, res, next) => {
     const { rows } = await db.query("SELECT * FROM card WHERE list_id = $1", [
       listId,
     ]);
+    console.log(123);
     res.status(200).json(rows);
   } catch (error) {
     res.send(500);
@@ -53,7 +53,6 @@ exports.list_cards_order = async (req, res, next) => {
       card_order,
       listId,
     ]);
-    console.log(card_order, listId);
     /*
     const queryNewId = await db.query("SELECT currval('card_id_seq')");
     const newCardId = queryNewId.rows[0].currval;
