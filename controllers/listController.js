@@ -13,10 +13,21 @@ exports.list_cards = async (req, res, next) => {
     const { rows } = await db.query("SELECT * FROM card WHERE list_id = $1", [
       listId,
     ]);
-    console.log(123);
-    res.status(200).json(rows);
+
+    // Get card order and add new card id to it.
+
+    let cardsOrder = await db.query(
+      "SELECT cards_order FROM list WHERE id = $1",
+      [listId]
+    );
+    cardsOrder = cardsOrder.rows[0].cards_order;
+    const cardsById = cardsOrder.map((id) => rows.find((c) => c.id === id));
+    console.log(cardsOrder, cardsById);
+
+    res.status(200).json(cardsById);
   } catch (error) {
-    res.send(500);
+    console.log(error);
+    res.sendStatus(500);
   }
 };
 
@@ -49,6 +60,7 @@ exports.list_cards_order = async (req, res, next) => {
   try {
     const { listId } = req.params;
     const { card_order } = req.body;
+    console.log(card_order);
     await db.query("UPDATE list SET cards_order = $1 WHERE id = $2", [
       card_order,
       listId,
