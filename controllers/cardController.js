@@ -1,3 +1,4 @@
+const e = require("express");
 const db = require("../db");
 
 exports.add_card = async (req, res, next) => {
@@ -14,16 +15,22 @@ exports.add_card = async (req, res, next) => {
     // Get card order and add new card id to it.
 
     let cardOrder = await db.query(
-      "SELECT cards_order FROM list WHERE id = $1",
+      "SELECT cards_order FROM list_cards_order WHERE list_id = $1",
       [list_id]
     );
 
     cardOrder = cardOrder.rows[0].cards_order;
-    cardOrder.push(newCardId);
-    await db.query("UPDATE list SET cards_order = $1 WHERE id = $2", [
-      cardOrder,
-      list_id,
-    ]);
+    if (cardOrder !== null) {
+      cardOrder.push(parseInt(newCardId));
+    } else {
+      cardOrder = [parseInt(newCardId)];
+    }
+    console.log(cardOrder);
+
+    await db.query(
+      "UPDATE list_cards_order SET cards_order = $1 WHERE list_id = $2",
+      [cardOrder, list_id]
+    );
 
     res.sendStatus(200);
   } catch (error) {
@@ -35,9 +42,28 @@ exports.add_card = async (req, res, next) => {
 exports.delete_card = async (req, res, next) => {
   try {
     const { cardId } = req.params;
+
+    // Get list id
+    let listId = await db.query("SELECT list_id FROM card WHERE id = $1", [
+      cardId,
+    ]);
+    listId = listId.rows[0].list_id;
+
+    // Get card order
+    let cardsOrder = await db.query(
+      "SELECT cards_order FROM list_cards_order WHERE list_id = $1",
+      [listId]
+    );
+    cardsOrder = cardsOrder.rows[0].cards_order;
+    cardsOrder = cardsOrder.filter((id) => id !== parseInt(cardId));
+    await db.query(
+      "UPDATE list_cards_order SET cards_order = $1 WHERE list_id = $2",
+      [cardsOrder, listId]
+    );
     await db.query("DELETE FROM card WHERE id = $1", [cardId]);
     res.sendStatus(200);
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 };
