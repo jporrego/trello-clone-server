@@ -93,3 +93,17 @@ exports.update_list_cards_order = async (req, res, next) => {
     res.send(500);
   }
 };
+
+// DELETE list
+exports.delete_list = async (req, res, next) => {
+  try {
+    const { listId } = req.params;
+    await db.query("DELETE FROM card WHERE list_id = $1", [listId]);
+    await db.query("DELETE FROM list_cards_order WHERE list_id = $1", [listId]);
+    await db.query("DELETE FROM list WHERE id = $1", [listId]);
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.send(500);
+  }
+};

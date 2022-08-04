@@ -44,7 +44,7 @@ exports.delete_card = async (req, res, next) => {
     const { cardId } = req.params;
 
     // Get list id, use it to get card order,
-    // remove the cardId from the card order and then delete the card.
+    // remove the cardId from the card order, updated it and then delete the card.
 
     let listId = await db.query("SELECT list_id FROM card WHERE id = $1", [
       cardId,

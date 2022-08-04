@@ -18,4 +18,7 @@ router.get("/:listId/cards/order", lists_controller.list_cards_order);
 // PUT update card order.
 router.put("/:listId/cards/order", lists_controller.update_list_cards_order);
 
+// DELETE update card order.
+router.delete("/:listId", lists_controller.delete_list);
+
 module.exports = router;
