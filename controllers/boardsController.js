@@ -21,8 +21,20 @@ exports.board_lists = async (req, res, next) => {
     const { rows } = await db.query("SELECT * FROM list WHERE board_id = $1", [
       boardId,
     ]);
-    console.log(rows);
-    res.status(200).json(rows);
+
+    let listOrder = await db.query(
+      "SELECT list_order FROM board_lists_order WHERE board_id = $1",
+      [boardId]
+    );
+
+    listOrder = listOrder.rows[0].list_order;
+
+    if (listOrder) {
+      const listsById = listOrder.map((id) => rows.find((l) => l.id === id));
+      res.status(200).json(listsById);
+    } else {
+      res.status(200).json(rows);
+    }
   } catch (error) {
     res.send(500);
   }
@@ -52,6 +64,7 @@ exports.update_board_lists_order = async (req, res, next) => {
     const { boardId } = req.params;
     const { list_order } = req.body;
     console.log(boardId, list_order);
+
     await db.query(
       "UPDATE board_lists_order SET list_order = $1 WHERE board_id = $2",
       [list_order, boardId]
