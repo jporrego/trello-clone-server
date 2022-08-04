@@ -49,13 +49,14 @@ exports.board_lists_order = async (req, res, next) => {
 
 exports.update_board_lists_order = async (req, res, next) => {
   try {
-    const { listId } = req.params;
-    const { card_order } = req.body;
-    console.log(listId, card_order);
+    const { boardId } = req.params;
+    const { list_order } = req.body;
+    console.log(boardId, list_order);
     await db.query(
-      "UPDATE list_cards_order SET cards_order = $1 WHERE list_id = $2",
-      [card_order, listId]
+      "UPDATE board_lists_order SET list_order = $1 WHERE board_id = $2",
+      [list_order, boardId]
     );
+
     res.sendStatus(200);
   } catch (error) {
     console.log(error);

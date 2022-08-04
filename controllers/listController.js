@@ -95,7 +95,7 @@ exports.update_list_cards_order = async (req, res, next) => {
   try {
     const { listId } = req.params;
     const { card_order } = req.body;
-    console.log(listId, card_order);
+
     await db.query(
       "UPDATE list_cards_order SET cards_order = $1 WHERE list_id = $2",
       [card_order, listId]
