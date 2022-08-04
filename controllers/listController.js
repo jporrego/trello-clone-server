@@ -111,8 +111,28 @@ exports.update_list_cards_order = async (req, res, next) => {
 exports.delete_list = async (req, res, next) => {
   try {
     const { listId } = req.params;
+
     await db.query("DELETE FROM card WHERE list_id = $1", [listId]);
     await db.query("DELETE FROM list_cards_order WHERE list_id = $1", [listId]);
+
+    // Get board id, use it to get list order,
+    // remove the listId from the list order, updated it and then delete the list.
+    let boardId = await db.query("SELECT board_id FROM list WHERE id = $1", [
+      listId,
+    ]);
+    boardId = boardId.rows[0].board_id;
+
+    let listOrder = await db.query(
+      "SELECT list_order FROM board_lists_order WHERE board_id = $1",
+      [boardId]
+    );
+    listOrder = listOrder.rows[0].list_order;
+    listOrder = listOrder.filter((id) => id !== parseInt(listId));
+    await db.query(
+      "UPDATE board_lists_order SET list_order = $1 WHERE board_id = $2",
+      [listOrder, boardId]
+    );
+
     await db.query("DELETE FROM list WHERE id = $1", [listId]);
     res.sendStatus(200);
   } catch (error) {
