@@ -25,7 +25,6 @@ exports.add_card = async (req, res, next) => {
     } else {
       cardOrder = [parseInt(newCardId)];
     }
-    console.log(cardOrder);
 
     await db.query(
       "UPDATE list_cards_order SET cards_order = $1 WHERE list_id = $2",

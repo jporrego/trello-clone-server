@@ -43,19 +43,32 @@ exports.add_list = async (req, res, next) => {
     await db.query(
       "INSERT INTO list_cards_order (list_id) SELECT currval('list_id_seq')"
     );
-    /*
-    const queryNewId = await db.query("SELECT currval('card_id_seq')");
-    const newCardId = queryNewId.rows[0].currval;
 
-    const queryNewCard = await db.query("SELECT * FROM card WHERE id = $1", [
-      newCardId,
-    ]);
-    const newCard = queryNewCard.rows;
+    // Get list order and add new list id to it.
+    let newListId = await db.query("SELECT currval('list_id_seq')");
+    newListId = newListId.rows[0].currval;
 
-    console.log(newCard);*/
+    let listOrder = await db.query(
+      "SELECT list_order FROM board_lists_order WHERE board_id = $1",
+      [board_id]
+    );
+
+    listOrder = listOrder.rows[0].list_order;
+    if (listOrder !== null) {
+      listOrder.push(parseInt(newListId));
+    } else {
+      listOrder = [parseInt(newListId)];
+    }
+
+    await db.query(
+      "UPDATE board_lists_order SET list_order = $1 WHERE board_id = $2",
+      [listOrder, board_id]
+    );
+
     res.sendStatus(200);
   } catch (error) {
     res.send(500);
+    console.log(error);
   }
 };
 

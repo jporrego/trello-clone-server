@@ -15,6 +15,14 @@ CREATE TABLE board
   CONSTRAINT "fk_user" FOREIGN KEY (user_id) REFERENCES app_user (id)
 );
 
+CREATE TABLE board_lists_order  
+(
+  "id" SERIAL PRIMARY KEY,
+  "board_id" INT NOT NULL,
+  "list_order" INT[],
+  CONSTRAINT "fk_board" FOREIGN KEY (board_id) REFERENCES board (id)
+);
+
 CREATE TABLE list 
 (
   "id" SERIAL PRIMARY KEY,
