@@ -69,3 +69,17 @@ exports.delete_card = async (req, res, next) => {
     res.sendStatus(500);
   }
 };
+
+exports.updated_card_description = async (req, res, next) => {
+  try {
+    const { cardId, description } = req.body;
+    await db.query("UPDATE card SET description = $1 WHERE id = $2", [
+      description,
+      cardId,
+    ]);
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+};
