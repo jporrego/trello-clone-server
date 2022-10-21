@@ -64,17 +64,20 @@ CREATE TABLE checklist_item
   CONSTRAINT "fk_checklist" FOREIGN KEY (checklist_id) REFERENCES checklist (id)
 );
 
-INSERT INTO app_user (name) VALUES ('Ranaflex');
+/*INSERT INTO app_user (name) VALUES ('Ranaflex');*/
 
 INSERT INTO board (user_id, name) VALUES ('2x0rxbeXqSXapWp5xPkPyTQL5hi2', 'Board 1');
+INSERT INTO board_lists_order (board_id ) SELECT currval('board_id_seq');
 INSERT INTO board (user_id, name) VALUES ('2x0rxbeXqSXapWp5xPkPyTQL5hi2', 'Board 2');
+INSERT INTO board_lists_order (board_id ) SELECT currval('board_id_seq');
 INSERT INTO board (user_id, name) VALUES ('2x0rxbeXqSXapWp5xPkPyTQL5hi2', 'Board 3');
+INSERT INTO board_lists_order (board_id ) SELECT currval('board_id_seq');
 
 
 INSERT INTO list (board_id, name) VALUES ('1', 'List 1');
-INSERT INTO list_cards_order (list_id) SELECT currval('1');
+INSERT INTO list_cards_order (list_id) SELECT currval('list_id_seq');
 INSERT INTO list (board_id, name) VALUES ('1', 'List 2');
-INSERT INTO list_cards_order (list_id) SELECT currval('1');
+INSERT INTO list_cards_order (list_id) SELECT currval('list_id_seq');
 
 INSERT INTO card (list_id, name, description) VALUES ('2', 'Card 1', 'Tesing card functionality');
 /*

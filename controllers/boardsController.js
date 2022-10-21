@@ -2,7 +2,10 @@ const db = require("../db");
 
 // Respond with single user.
 exports.boards = async (req, res, next) => {
-  const { rows } = await db.query("SELECT * FROM board");
+  const { userId } = req.params;
+  const { rows } = await db.query("SELECT * FROM board WHERE user_id = $1", [
+    userId,
+  ]);
   console.log(rows);
   res.status(200).json(rows);
 };
