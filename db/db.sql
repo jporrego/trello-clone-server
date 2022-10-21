@@ -11,8 +11,7 @@ CREATE TABLE board
 (
   "id" SERIAL PRIMARY KEY,
   "user_id" INT NOT NULL,
-  "name" VARCHAR(100)  NOT NULL,
-  CONSTRAINT "fk_user" FOREIGN KEY (user_id) REFERENCES app_user (id)
+  "name" VARCHAR(100)  NOT NULL
 );
 
 CREATE TABLE board_lists_order  
@@ -67,15 +66,15 @@ CREATE TABLE checklist_item
 
 INSERT INTO app_user (name) VALUES ('Ranaflex');
 
-INSERT INTO board (user_id, name) VALUES ('1', 'Board 1');
-INSERT INTO board (user_id, name) VALUES ('1', 'Board 2');
-INSERT INTO board (user_id, name) VALUES ('1', 'Board 3');
+INSERT INTO board (user_id, name) VALUES ('2x0rxbeXqSXapWp5xPkPyTQL5hi2', 'Board 1');
+INSERT INTO board (user_id, name) VALUES ('2x0rxbeXqSXapWp5xPkPyTQL5hi2', 'Board 2');
+INSERT INTO board (user_id, name) VALUES ('2x0rxbeXqSXapWp5xPkPyTQL5hi2', 'Board 3');
 
 
-INSERT INTO list (board_id, name) VALUES ('2', 'List 1');
-INSERT INTO list_cards_order (list_id) SELECT currval('list_id_seq');
-INSERT INTO list (board_id, name) VALUES ('2', 'List 2');
-INSERT INTO list_cards_order (list_id) SELECT currval('list_id_seq');
+INSERT INTO list (board_id, name) VALUES ('1', 'List 1');
+INSERT INTO list_cards_order (list_id) SELECT currval('1');
+INSERT INTO list (board_id, name) VALUES ('1', 'List 2');
+INSERT INTO list_cards_order (list_id) SELECT currval('1');
 
 INSERT INTO card (list_id, name, description) VALUES ('2', 'Card 1', 'Tesing card functionality');
 /*
