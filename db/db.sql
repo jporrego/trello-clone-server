@@ -80,7 +80,9 @@ INSERT INTO card (list_id, name, description) VALUES ('2', 'Card 1', 'Tesing car
 /*
 UPDATE list
 SET cards_order = cards_order || SELECT currval('card_id_seq'),
-WHERE id = 2;*/
+WHERE id = 2;
+ignore this line
+*/
 INSERT INTO card (list_id, name, description) VALUES ('2', 'Card 2','Tesing card functionality');
 INSERT INTO card (list_id, name, description) VALUES ('3', 'Card 1','Tesing card functionality');
 INSERT INTO card (list_id, name, description) VALUES ('3', 'Card 2','Tesing card functionality');
