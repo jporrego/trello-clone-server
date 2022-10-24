@@ -3,6 +3,9 @@ const router = express.Router();
 
 const boards_controller = require("../controllers/boardsController");
 
+// Add one card.
+router.post("/", boards_controller.add_board);
+
 // GET All boards.
 router.get("/:userId", boards_controller.boards);
 

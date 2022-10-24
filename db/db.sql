@@ -11,10 +11,9 @@ CREATE TABLE board
 (
   "id" SERIAL PRIMARY KEY,
   "user_id" INT NOT NULL,
-  "title" VARCHAR(50),
-  "background_color" VARCHAR(6),
-  "background_img" VARCHAR(200),
-  "name" VARCHAR(100)  NOT NULL
+  "title" VARCHAR(50) NOT NULL,
+  "bg_img" VARCHAR(200),
+  "bg_color" VARCHAR(6),
 );
 
 CREATE TABLE board_lists_order  

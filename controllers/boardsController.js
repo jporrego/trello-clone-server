@@ -1,6 +1,30 @@
 const db = require("../db");
 
-// Respond with single user.
+exports.add_board = async (req, res, next) => {
+  try {
+    const { userId, title, bgImg, bgColor } = req.body;
+    console.log({ userId, title, bgImg, bgColor });
+
+    await db.query(
+      "INSERT INTO board (user_id, title, bg_img, bg_color) VALUES ($1, $2, $3, $4)",
+      [userId, title, bgImg, bgColor]
+    );
+
+    // Get list order and add new board id to it.
+    const queryNewId = await db.query("SELECT currval('board_id_seq')");
+    const newBoardId = queryNewId.rows[0].currval;
+
+    await db.query("INSERT INTO board_lists_order (board_id ) VALUES ($1);", [
+      newBoardId,
+    ]);
+
+    res.status(200).json(newBoardId);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+};
+
 exports.boards = async (req, res, next) => {
   const { userId } = req.params;
   const { rows } = await db.query("SELECT * FROM board WHERE user_id = $1", [
