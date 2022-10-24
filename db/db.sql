@@ -13,7 +13,7 @@ CREATE TABLE board
   "user_id" INT NOT NULL,
   "title" VARCHAR(50) NOT NULL,
   "bg_img" VARCHAR(200),
-  "bg_color" VARCHAR(6),
+  "bg_color" VARCHAR(7),
 );
 
 CREATE TABLE board_lists_order  
